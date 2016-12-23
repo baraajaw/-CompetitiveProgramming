@@ -1,0 +1,26 @@
+	#include<iostream>
+	#include<string>
+	#include<cctype>
+	using namespace std;
+	int main()
+	{
+	
+		string s ;
+		cin >> s ;
+		int len = s.size();
+		for ( int i = 0 ; i < len ; i++)
+		{
+	if (tolower(s[i]) == 'a' || tolower(s[i]) == 'o' || tolower(s[i])=='u' || tolower(s[i]) =='y' ||tolower(s[i]) =='i' ||tolower(s[i])=='e')
+		   s.erase(i--, 1);
+		}
+		len = s.size();
+		for ( int i = 0 ; i < len ; i++)
+		{
+			cout<<"."<<static_cast<char>(tolower(s[i]));
+	
+		}
+		cout<<endl;
+	
+	
+		return 0;
+	}
