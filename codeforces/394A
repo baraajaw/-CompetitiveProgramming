@@ -1,0 +1,61 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+	string s;
+	cin >> s;
+	int count1 = 0 , count2 = 0 , len = s.size() , be = s.find('+') , af = s.find('=') , c1 = 0 , c2 =0;
+
+	for ( int i = 0 ; i < af ; i++)
+	{
+		if( s[i] == '|')
+			count1++;
+	}
+
+
+	for ( int i = af ; i < len ; i++ )
+	{
+		if ( s[i] == '|')
+			count2++;
+	}
+
+	//**************************
+	if (count1 != count2)
+	{
+		if ( count1 < count2)
+		{
+			s [ af + 1 ] = s[af];
+			s[af] = '|';
+			count1++;
+			count2--;
+		}
+		else
+		{
+			s [ af - 1 ] = s[af];
+			s[af] = '|';
+		    count1--;
+			count2++;
+
+			for ( int i = 0 ; i < be ; i++)
+				if( s[i] =='|')
+					c1++;
+			for ( int i = be ; i < af ; i++)
+				if(s[i] == '|')
+				 c2++;
+			if ( c2 == 0)
+			{
+				s[be - 1] = s[be];
+				s[be] = '|';
+			}
+		}
+
+	if ( count2 == count1)
+		cout<<s<<endl;
+	else
+		cout<<"Impossible"<<endl;
+	}
+	else
+		cout<<s<<endl;
+	return 0;
+}
