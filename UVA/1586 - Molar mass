@@ -1,0 +1,60 @@
+#include<iostream>
+#include<string>
+#include<iomanip>
+using namespace std;
+int main()
+{
+  int x , len , b ; 
+  double total = 0 ;
+  char c;
+  cin >> x;
+  string s;
+  for(int i = 0 ;i < x; i++)
+  {
+    cin >> s;
+    len = s.size();
+    for ( int j = 0 ; j < len ; j++)
+    {   
+                c = s[j];
+
+      
+      if ( s[j + 1] >= 48 && s[j + 1] <= 57 )
+      {
+        while ( s[j + 1] >= 48 && s[j + 1] <= 57)
+        {
+          b = (b  * 10 + ( s[j + 1] - '0') );
+          j++;
+        }
+        j--;
+      }
+else
+      {
+        b = 1;
+      }
+      
+      
+        if ( c =='C')
+         {
+           total += b * 12.01;
+         }
+         else if ( c =='H')
+            total += b * 1.008;
+       
+         else if ( c =='O')
+           total += b * 16.00;
+       
+       else  if ( c =='N')
+          total += b * 14.01;
+       
+         b = 0;
+         
+         
+       
+    }
+    cout<<fixed<<setprecision(3);
+      cout<<total<<endl;
+     total = 0;
+  }
+  
+	return 0;
+}
