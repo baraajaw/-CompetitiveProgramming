@@ -1,0 +1,47 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int main() {
+  
+ int x , y , *z , n ;
+ double mo , f;
+ string *p , s ,g;
+ bool blankline = false;
+ while (cin >> x)
+ {
+     if(blankline) cout << endl;
+ p = new string[x];
+ z = new int[x];
+ for ( int i = 0; i < x; i++)
+    z[i] = 0;
+
+ for ( int i = 0; i < x; i++)
+ {
+   cin >>p[i];
+ }
+ for ( int i = 0; i < x; i++)
+  {
+    cin >>s >> mo >> y;
+    n = mo / y;
+    mo = mo - (mo - n * y);
+    for ( int j = 0 ; j < y ; j++)
+    {
+       cin >> g;
+         for ( int q = 0 ; q < x; q++)
+         if ( g == p[q])
+           z[q] += n;
+    }
+    for ( int q = 0 ; q < x; q++)
+        if ( s == p[q])
+           z[q] -= mo;
+
+  }
+   for ( int i = 0; i < x; i++)
+     {
+       cout<<p[i]<<" "<<z[i]<<endl;
+     }
+     blankline = true;
+ }
+
+  return 0;
+}
