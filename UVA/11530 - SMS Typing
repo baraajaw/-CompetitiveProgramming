@@ -1,0 +1,44 @@
+#include <iostream>
+#include<iomanip>
+using namespace std;
+int main() {
+  
+  
+  int x ,count = 0;
+  cin >> x;
+  string s;
+        cin.ignore();
+
+  for ( int i = 0 ; i < x ; i++)
+  {
+     getline ( cin , s);
+     
+    for ( int j = 0 ; j < s.size() ; j++)
+   {
+    if ( s[j]==' ' ||  tolower(s[j]) == 'a' ||  tolower(s[j]) == 'd' ||  tolower(s[j]) == 'g' ||  tolower(s[j]) == 'j' ||  tolower(s[j]) == 'm' ||  tolower(s[j]) == 'p' ||  tolower(s[j]) == 't' ||  tolower(s[j]) == 'w' )
+     {
+       count++;
+     }
+  else if ( tolower(s[j]) == 'b' ||  tolower(s[j]) == 'e' ||  tolower(s[j]) == 'h' ||  tolower(s[j]) == 'k' ||  tolower(s[j]) == 'n' ||  tolower(s[j]) == 'q' ||  tolower(s[j]) == 'u' ||  tolower(s[j]) == 'x')
+   {
+      count =count + 2;
+   }
+    else if ( tolower(s[j]) == 'c' ||  tolower(s[j]) == 'f' ||  tolower(s[j]) == 'i' ||  tolower(s[j]) == 'l' ||  tolower(s[j]) == 'o' ||  tolower(s[j]) == 'r' ||  tolower(s[j]) == 'v' ||  tolower(s[j]) == 'y')
+     {
+        count += 3;
+     }
+      else if ( tolower(s[j]) == 's' ||  tolower(s[j]) == 'z')
+      {
+        count += 4;
+      }
+      }
+      
+      
+      
+      cout<<"Case #"<< i + 1<<": "<<count<<endl;
+      count = 0;
+    
+  }
+  
+  return 0;
+}
