@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+#include <map>
+#include<iomanip>
+using namespace std;
+int main() {
+  
+  map < char , int> arr;
+  int n , x , y ;
+  double d =0;
+  string s;
+  char c;
+  cin >> n; 
+  for ( int i = 0 ; i < n ; i++)
+  {   arr.clear();
+    cin >> x;
+    for (int j = 0 ; j < x ; j++)
+    {
+      cin >> c >> y;
+      arr[c] = y;
+      
+    }
+    cin >> y;
+    cin.ignore();
+       
+    for (int j = 0 ; j < y ; j++)
+        {
+          getline ( cin , s);
+          for ( int q = 0 ; q < s.size() ; q++)
+            d += arr[s[q]];
+
+      }
+        cout<<fixed<<setprecision(2);
+        cout<<d / 100<<"$"<<endl;
+      d = 0;        
+  }
+  
+  return 0;
+}
