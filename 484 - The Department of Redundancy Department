@@ -1,0 +1,46 @@
+#include <iostream>
+#include<map>
+#include<vector>
+#include<string>
+using namespace std;
+
+int main() {
+
+int x  ,  y  ,  d  =  0  ,  q  ;
+
+vector < pair < int , int > > arr_of_pairs;
+
+string s ;
+bool flag = true;
+
+while (cin >> x)
+{
+ 
+  if ( arr_of_pairs.empty())
+  {
+    arr_of_pairs.push_back( make_pair( x , 1));
+  }
+  else
+  {
+      for ( int i = 0 ; i < arr_of_pairs.size() ;i++)
+            if ( x == arr_of_pairs[i].first )
+                {
+                  flag = false;
+                  q = i;
+                }
+            
+            if ( flag)
+         arr_of_pairs.push_back( make_pair( x , 1));
+         else
+         arr_of_pairs[q].second++;
+
+            
+  }
+  flag = true;
+}
+for ( int i = 0 ; i < arr_of_pairs.size() ;i++)
+ cout << arr_of_pairs[i].first << ' ' << arr_of_pairs[i].second << endl;
+   
+
+return 0;
+}
