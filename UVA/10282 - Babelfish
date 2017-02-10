@@ -1,0 +1,35 @@
+#include <iostream>
+#include<map>
+#include<string>
+using namespace std;
+
+int main() {
+
+map <string , string  > arr ;
+string s , c = "";
+bool flag = false;
+int q;
+
+while ( getline( cin , s) && s != "")
+{
+  q = s.find( ' ' , 0);
+   c = s.substr(0 , q );
+   s = s.substr( q + 1 );
+   arr[s] = c;
+   //cout<<s<<" "<<c<<endl;
+   c ="";
+
+}
+while ( getline( cin , s) && s != "")
+{
+     if ( arr.count(s))
+      cout<<arr[s]<<endl;
+      else
+      cout<<"eh"<<endl;
+     
+}
+
+
+return 0;
+  
+}
