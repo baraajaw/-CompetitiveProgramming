@@ -1,0 +1,44 @@
+#include<iostream>
+#include<vector>
+#include<map>
+#include<string>
+#include<algorithm>
+#include<iomanip>
+using namespace std;
+int main()
+{
+  
+  int n ;
+  string s;
+  double d = 0.00;
+  map <string , int> arr;
+  
+  cin >> n;
+  cin.ignore();
+  getline( cin , s);
+   for ( int i = 0 ; i < n ; i ++)
+      {
+        arr.clear();
+        map <string , int>::iterator it;
+
+        while (getline( cin , s) && s != "") 
+           {
+             arr[s]++;
+             d++;
+           }
+                   it = arr.begin();
+
+         while(it != arr.end() )
+         {
+           cout<<fixed<<setprecision(4);
+           cout<<it->first<<" "<<it->second / d * 100 <<endl;
+           it++;
+         }
+         d = 0.00;
+         if (i + 1 != n)
+         cout<<endl;
+        
+      }
+      
+  return 0;
+}
