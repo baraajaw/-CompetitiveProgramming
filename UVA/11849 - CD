@@ -1,0 +1,28 @@
+#include <iostream>
+#include<set>
+using namespace std;
+
+
+int main() {
+ 
+ int x , y , w;
+while(cin >> x >> y && (x != 0 || y != 0))
+{
+   set <int> st;
+
+  for ( int i = 0 ; i < x ; i++)
+    {
+      cin >>w;
+      st.insert(w);
+    }
+    for ( int i = 0 ; i < y ; i++)
+    {
+      cin >>w;
+      st.insert(w);
+    }
+    cout<<x+y - st.size()<<endl;
+}
+
+
+
+return 0;}
