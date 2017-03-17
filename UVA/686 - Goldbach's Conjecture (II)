@@ -1,0 +1,61 @@
+#include <iostream>
+#include <vector>
+#include <memory.h>
+#include<algorithm>
+
+using namespace std;
+
+int const N = 1e6 + 1;
+bool prime[N];
+vector<int> primes;
+
+void sieve() {
+  memset(prime, true, sizeof prime);
+  
+  prime[0] = false;
+  prime[1] = false;
+  
+  for(int i = 2; i * i < N; i++)
+    if(prime[i])
+      for(int j = i + i; j < N; j += i)
+        prime[j] = false;
+  for(int i = 0; i < N; i++)
+    if(prime[i])
+      primes.push_back(i);
+}
+int main ()
+{
+  sieve();
+  int x , *p , q ,count = 0;
+  
+  cin>> x;
+  while ( x != 0)
+  {
+    p = new int[x];
+    q = x - 1;
+    
+  for ( int i = 0 ; i < x ;i++)
+    p[i] = i;
+  
+  for ( int i = 1 ; i < x / 2 ; i++)
+    {
+    if ( binary_search( primes.begin() , primes.end() , p[i] ) && binary_search( primes.begin() , primes.end() , p[q] ))
+       {
+         count++;
+        // cout<<p[i]<<"  "<<p[q]<<endl;
+       }
+       q--;
+    }
+        
+  if (binary_search( primes.begin() , primes.end() , x / 2 ) && binary_search( primes.begin() , primes.end() , x / 2 ))  
+      count++;
+      
+    cout<<count<<endl;
+    count = 0;
+    cin >> x;
+  }
+  
+  
+  
+  return 0;
+}
