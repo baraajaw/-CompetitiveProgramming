@@ -1,0 +1,54 @@
+#include<iostream>
+#include<algorithm>
+#include<string>
+using namespace std; 
+int main()
+{
+  int x ;
+  string s , c = "";
+  
+  pair < int , char > freq[26];
+  for ( int i = 0 ; i < 26 ;i++)
+  {
+    freq[i].first = 0;
+    freq[i].second = char(i + 'a') ;
+  }
+  cin >> x;
+  cin.ignore();
+  for ( int i = 0 ; i < x ; i++)
+  {
+    getline ( cin , s);
+    for ( int j = 0 ; j < s.size() ; j++ )
+      {
+        if ( isalpha(s[j]))
+         freq[tolower(s[j]) - 'a'].first++;
+      }
+    sort( freq , freq + 26);
+    int q = 25;
+    
+    
+    while ( q >= 0 && freq[q].first == freq[q - 1].first)
+    {
+      c += freq[q].second;
+      q--;
+    }
+    c += freq[q].second;
+    for ( int j = c.size() - 1 ; j >= 0 ;j--)
+      cout<<c[j];
+      
+    for ( int j = 0 ; j < 26 ; j++)  
+     {
+    freq[j].first = 0;
+    freq[j].second = char(j + 'a') ;
+  }
+    
+    cout<<endl;
+    c = "";
+  }
+  
+  
+  
+  
+  
+  return 0;
+}
