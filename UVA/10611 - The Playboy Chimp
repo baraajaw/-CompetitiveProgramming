@@ -1,0 +1,36 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std; 
+int main()
+{
+ int x , y , z , index , in; 
+ vector <int> v;
+ cin >> x ; 
+ 
+ for ( int i = 0 ; i < x ; i++)
+ {
+   cin >> y;
+   v.push_back(y);
+ }
+ sort ( v.begin() , v.end());
+ cin >> z;
+ for ( int i = 0 ; i < z ; i++)
+ {
+   cin >> y;
+    in = lower_bound ( v.begin() , v.end() , y ) - v.begin();
+    if ( in == 0)
+    cout<<"X ";
+    else
+    
+   cout<< v [ in - 1]<<" ";
+   index = upper_bound ( v.begin() , v.end() , y ) - v.begin();
+   if ( v[index] == 0)
+   cout<<"X"<<endl;
+   else
+   cout<<v[index]<<endl;
+  
+ }
+  
+  return 0;
+}
