@@ -1,0 +1,71 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std; 
+int main()
+{
+  int n , l = 0 , q = 0 ;
+  int arr [] ={12 , 28 , 44, 60 ,76 , 92 , 108};
+  int arr2 [] = { 16 , 32 , 48 , 64 , 80 , 96 , 112};
+  vector<string> vct , vct3;
+  
+  vct3.push_back("Happy");
+  vct3.push_back("birthday");
+  vct3.push_back("to");
+  vct3.push_back("you");
+  cin>> n ;
+    
+  vct.resize(n);
+  for ( int i = 0 ; i < n ; i++)
+     cin >> vct[i];
+  if ( n <= 16)   
+  while (l < 16)
+  {
+    cout<<vct[q++]<<": ";
+    if ( l == 0 || l == 4 || l == 8 || l == 12)
+       cout<<"Happy"<<endl;
+    else if ( l == 1 || l == 5 || l == 9 || l == 13)
+       cout<<"birthday"<<endl;
+    else if ( l == 2 || l == 6 || l == 10 || l == 14)
+    cout<<"to"<<endl;
+    else if ( l == 3 || l == 7 || l == 15 )
+    cout<<"you"<<endl;
+    if ( l == 11)
+    cout<<"Rujia"<<endl;
+    l++;
+    if ( q == vct.size())
+      q =0;
+  }
+  else
+  {
+    l = 1;
+     q = 0;
+     int e = 0;
+     if ( binary_search ( arr2 , arr2 + 7 , n ));
+     n = arr2[lower_bound ( arr2 , arr2 + 7 , n) - arr2];
+    while ( l<= n)
+    {
+      cout<<vct[e++]<<": ";
+      
+         
+      if (vct3[q] == "you" && binary_search( arr , arr + 7 , l))
+      {
+        cout<<"Rujia"<<endl;
+      }
+      else
+      cout<<vct3[q]<<endl;
+      
+       q++;
+      if( q == 4 )
+        q = 0;
+        if ( e == vct.size())
+         e = 0;
+         l++;  
+    }
+    
+  }
+  
+  
+ return  0; 
+}
