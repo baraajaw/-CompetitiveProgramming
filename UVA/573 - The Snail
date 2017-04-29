@@ -1,0 +1,44 @@
+#include<iostream>
+using namespace std; 
+int main()
+{
+  
+  int    u  , day = 0 ;
+  bool flag = true;
+  double l = 0 , n = 0 , f , h , d;
+  while ( cin >> h >> u >> d >> f && h != 0)
+  {
+    l = (f / 100.0) * u;
+    double tmp = l;
+    n += u;
+    if ( n <= h)
+    n -= d;
+    day++;
+    
+      //cout <<l<<" "<<n<<" "<<endl;
+    while ( n < h && n >= 0)
+    {
+      n = n +  ( u - l);
+      if (l < u && flag)
+      l += tmp;
+      else 
+      {
+        flag = false;
+        l = u;
+      }
+      day++;
+      if ( n > h)
+      break;
+      n -=  d;
+}
+    if ( n < 0)
+       cout<<"failure on day "<<day<<endl;
+    else 
+      cout<<"success on day "<<day<<endl;
+    day = 0;
+    n = 0;
+    flag = true;
+  }
+  
+  return 0;
+}
