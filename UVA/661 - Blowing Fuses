@@ -1,0 +1,55 @@
+#include<iostream>
+#include<vector>
+using namespace std; 
+int main()
+{
+  
+  int n , m , c , sum = 0 , no = 0 , max = 0 , j = 1;
+  vector<int> vct , vct1;
+  vector<int> ifon;
+  while ( cin >> n >> m >> c && n != 0 && m != 0 && c != 0)
+  {
+    vct.clear();
+    vct.resize(n);
+    ifon.clear();
+    ifon.resize(n);
+    
+     vct1.clear();
+    vct1.resize(m);
+    
+    for ( int i = 0 ; i < n ; i++)
+    cin>> vct[i];
+    
+    for ( int i = 0 ; i < m ; i++)
+      {
+        cin >> vct1[i];
+         
+       if ( ifon[vct1[i] - 1])
+         {
+           ifon[vct1[i] - 1] = false;
+           sum -= vct[vct1[i] - 1];
+         }
+       else
+       {
+        ifon[vct1[i] - 1] = true;
+        sum += vct[ vct1[i] - 1];
+         if ( sum > c)
+          no++;
+          if ( sum > max)
+           max = sum;
+       }
+      }
+      cout<<"Sequence "<<j++<<endl;
+    if ( no <= 0)
+       {
+         cout<<"Fuse was not blown."<<endl;
+        cout<<"Maximal power consumption was "<<max<<" amperes."<<endl;
+       }
+    else
+    cout<<"Fuse was blown."<<endl;
+    max = sum = no = 0;
+    cout<<endl;
+  }
+  
+  return 0;
+}
