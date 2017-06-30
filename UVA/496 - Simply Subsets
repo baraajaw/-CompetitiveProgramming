@@ -1,0 +1,82 @@
+#include<iostream>
+#include<string>
+#include<algorithm>
+#include<vector>
+#include<map>
+using namespace std; 
+int main()
+{
+  
+  string s , c , t;
+  int count = 0;
+  bool flag = true;
+  vector<string> st ,st2;
+  while ( getline (cin , s) && getline ( cin , c) )
+  {
+    st2.clear();
+    st.clear();
+    count = 0;
+    
+    for (int i = 0 ; i < s.size() ; i++)
+       if ( s[i] != ' ')
+          t += s[i];
+        else
+         {
+           st.push_back(t);
+           t = "";
+         }
+    if ( t.size() > 0)
+         {
+           st.push_back(t);
+           t = "";
+         }
+         
+    for ( int i = 0 ; i < c.size() ; i++)
+      if(c[i] != ' ')
+         t += c[i];
+      else
+         {
+           st2.push_back(t);
+           t = "";
+         }
+     if ( t.size() > 0)
+         {
+           st2.push_back(t);
+           t = "";
+         }
+     sort ( st.begin() , st.end());
+     sort( st2.begin() , st2.end());
+    
+     if (st == st2)
+      puts ("A equals B");
+     else if ( st.size() > st2.size())
+     { 
+       
+       for ( int i = 0 ; i < st2.size() ; i++)
+           if ( binary_search (st.begin() , st.end() , st2[i]))
+               count++;
+      if ( count == st2.size())     
+           puts("B is a proper subset of A");
+      else if ( count < st2.size() && count > 0)
+           puts ("I'm confused!");
+      else 
+       puts ("A and B are disjoint");
+      
+     }
+     else
+     {
+      for ( int i = 0 ; i < st.size() ; i++)
+         if ( binary_search (st2.begin() , st2.end() , st[i]))
+           count++;
+      if ( count == st.size())     
+           puts("A is a proper subset of B");
+      else if ( count < st2.size() && count > 0)
+           puts ("I'm confused!");
+      else 
+       puts ("A and B are disjoint"); 
+     }
+     
+  }
+  
+  return 0;
+}
