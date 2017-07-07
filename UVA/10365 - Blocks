@@ -1,0 +1,34 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include<stdio.h>
+using namespace std;
+int main()
+{
+  
+  int n , t , mina = 999999999;
+  scanf ("%d" , &t);
+  
+  for ( int i = 0 ; i < t ; i++)
+  {
+    
+    scanf ("%d" ,  &n);
+    mina = 999999999;
+    for ( int w = 1 ; w <= n ; w++)
+    for ( int l = 1; l <= n ; l++)
+    {
+      if ( l * w > n)
+         break;
+         for ( int h = 1 ; h <= n ; h++)
+           {
+             if ( h * l * w > n)
+                break;
+              if ( h * l * w == n)
+                 mina = min ( mina , 2*( l*w + w*h + l*h));
+           }
+    }
+    printf ("%d\n" , mina);
+  }
+  
+  return 0;
+}
