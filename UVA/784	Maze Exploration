@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <memory.h>
+#include <vector>
+#include <algorithm>
+#include<iostream>
+#include<string>
+#include<map>
+using namespace std;
+int n , cnt = 0;
+int dx [] = { -1 , -1 , 0 , 1 , 1 , 1 , 0 -1 };
+int dy[]  = { 0, 1 , 1, 1 , 0 ,-1 , -1 , -1 };
+vector <string>  g;
+void dfs(int x , int y )
+{
+    g[x][y] = '#';
+    for ( int i = 0 ; i < 8 ; ++i )
+    {
+      int nx = x + dx[i];
+      int ny = y + dy[i];
+      if (nx < g.size() && nx >= 0 && ny >= 0  && ny < g[x].size()&& g[nx][ny] ==' ')
+           dfs ( nx , ny );
+    }
+}
+
+int main() {
+
+int t;
+string s;
+scanf ( "%d" , &t);
+cin.ignore();
+
+while ( t--)
+{
+
+   g.clear();
+  while (getline ( cin , s) && s[0] != '_' )
+       g.push_back(s);
+  string tmp = s;     
+  for ( int i = 0 ; i < g.size() ; ++i)
+     for ( int j = 0 ; j < g[i].size() ; ++j)
+           if ( g[i][j] == '*')
+           dfs( i , j);
+  for ( int i = 0 ; i < g.size() ; ++i)
+     cout<< g[i]<<endl;
+  cout <<tmp<<endl;   
+}
+	
+	return 0;
+}
