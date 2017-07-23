@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <memory.h>
+#include <vector>
+#include <algorithm>
+#include<iostream>
+#include<string>
+#include <ctype.h>
+#include <iomanip>     
+#include<queue>
+using namespace std;
+string src, des;
+int const N = 8;
+int dx[] = { -2 , -2 , -1 , -1 , 2 , 2 , 1 , 1};
+int dy[] = { 1 , -1 , 2 , -2 , 1 , -1 , 2 , -2};
+queue<pair<int, int> > q;
+bool vis[N][N];
+int cost[N][N];
+int bfs (int sx, int sy, int ex, int ey)
+{
+	int cnt = 0;
+	while (!q.empty()) q.pop();
+
+	memset ( vis , false , sizeof vis);
+	memset ( cost , 0 , sizeof cost);
+	
+	q.push( make_pair ( sx  , sy));
+	vis[sx][sy] = true;
+	while (!q.empty())
+	{
+		pair < int , int > fr = q.front();
+        q.pop();
+        for ( int i = 0 ; i < 8 ; ++i)
+        {
+        	int nx = fr.first+ dx[i];
+        	int ny = fr.second + dy[i];
+        	if ( nx < 8 && nx >= 0 && ny < 8 && ny >= 0 && !vis[nx][ny])
+        	{
+        		cost[nx][ny] = cost[fr.first][fr.second] + 1;
+        		if (ex == nx && ey == ny) 
+        			return cost[nx][ny];
+        		vis[nx][ny] = true;
+        		q.push(make_pair(nx, ny));
+        	}
+        }
+	}
+
+	return 0; 
+}
+int main() {
+
+	while ( cin >> src >> des )
+	{
+		if ( src == des)
+			{
+			cout <<"To get from "<<src<<" to "<<des<<" takes 0 knight moves."<<endl;
+			continue;
+			}
+		int sx = src[0] - 'a';
+		int sy = src[1] - '0' - 1;
+		int ex = des[0] - 'a';
+		int ey = des[1] - '0' - 1;
+		cout <<"To get from "<<src<<" to "<<des<<" takes "<<bfs (sx , sy , ex , ey)<<" knight moves."<<endl;
+
+	}
+
+	return 0;
+}
