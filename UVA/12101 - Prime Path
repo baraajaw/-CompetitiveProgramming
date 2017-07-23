@@ -1,0 +1,101 @@
+#include <stdio.h>
+#include <memory.h>
+#include <vector>
+#include <algorithm>
+#include<iostream>
+#include<string>
+#include <ctype.h>
+#include <iomanip>     
+#include<map>
+#include<queue>
+using namespace std;
+int const N = 1e4 + 1;
+bool prime[N];
+vector <int > primes;
+vector < vector < int> > g(N);
+bool vis[N];
+int cost[N];
+queue<int> q;
+void sieve()
+{
+	memset ( prime , true , sizeof prime);
+	prime[0] = prime[1] = false;
+	for ( int i = 2 ; i * i < N ; ++i)
+		  if ( prime[i])
+			  for ( int j = i + i ; j < N ; j+= i)
+				   prime[j] = false;
+	
+  for ( int i = 1000 ; i < N ; ++i)
+	  if ( prime[i])
+		   primes.push_back(i);
+}
+bool dif (int p1 ,int p2)
+{
+	int sum = 0 ;
+	while ( p1 != 0 )
+	{
+		if (p1 % 10 == p2 % 10 )
+			 sum++;
+		p1 /= 10;
+		p2 /= 10;
+	}
+	return (sum == 3);
+}
+void buildgraph ()
+{
+	for ( int i =0 ; i < (int)primes.size() ; ++i)
+		for (int j = 0 ; j < (int)primes.size() ; ++j)
+		      if(i != j && dif(primes[i], primes[j]) == 1)
+				       g[primes[i]].push_back(primes[j]);
+              
+}
+int bfs ( int src , int des)
+{
+  memset ( vis , false , sizeof vis);
+  memset ( cost , 0 , sizeof cost);
+    while(!q.empty()) q.pop();
+
+  q.push(src);
+  while ( !q.empty())
+  {
+     int fr = q.front();
+      q.pop();
+      vis[fr] = true;
+       if(fr == des)
+        return cost[fr];
+      
+      for ( int i = 0 ; i < (int)g[fr].size() ; ++i)
+          if ( !vis[g[fr][i]])
+              {
+                q.push(g[fr][i]);
+                cost[g[fr][i]] = cost[fr] + 1;
+                vis[g[fr][i]] = true;
+              }
+  }
+    return -1;
+
+}
+int main() {
+
+   sieve();
+   buildgraph();
+	int n , m , t , res;
+	scanf ("%d" , &t);
+	while ( t-- != 0 )
+	    {
+	      scanf ("%d%d" , &n , &m);
+	      if ( n == m)
+	       puts("0");
+	       else
+	       {
+	         res = bfs ( n , m);
+	         if (res == -1)
+	            puts("Impossible");
+	         else
+	         printf ("%d\n" , res);
+	       }
+	      // cout << n << " "<<m << endl;
+	    }
+
+	return 0;
+}
