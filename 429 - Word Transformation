@@ -1,0 +1,83 @@
+#include<iostream>
+#include<string>
+#include<vector> 
+#include<queue>
+#include<stdio.h>
+#include<memory.h>
+#include<map>
+using namespace std;
+vector < string > vct;
+vector < vector < string > > g;
+map < string , int > mp;
+queue < string > q;
+int const N = 201;
+bool vis[N];
+int bfs ( string src , string des)
+{
+  int cost = 0 ,size ;
+  memset (vis , false , sizeof vis);
+   while ( !q.empty()) q.pop();
+   q.push(src);
+   while ( !q.empty())
+   {
+     size = q.size();
+     while ( size--)
+     {
+       string fr = q.front();
+       q.pop();
+       vis[mp[fr]] =  true;
+       if ( fr == des)
+        return cost;
+       for ( int i = 0 ; i < g[mp[fr]].size() ; ++i)
+           if ( !vis[mp[g[mp[fr]][i]]])
+               q.push(g[mp[fr]][i]);
+     }
+     cost++;
+   }
+   return 0;
+}
+int main()
+{
+  int t; 
+  string s;
+  scanf ("%d" , &t);
+  for ( int tt = 0  ; tt < t ; ++tt)
+  {
+    vct.clear();
+    mp.clear();
+    int cnt = 0;
+    while ( cin >> s && s != "*")
+        {
+          vct.push_back(s);
+          mp[s] = cnt++;
+        }
+  g.clear();
+  g.resize(vct.size());
+  cnt = 0;
+  for ( int i = 0 ; i < vct.size() ; ++i)
+       for ( int j = 0 ; j < vct.size() ; ++j )
+         {
+           cnt = 0;
+           if ( vct[i].size() == vct[j].size() && i != j)
+            {
+               for ( int k = 0 ; k < vct[i].size() ; ++k) 
+                   if ( vct[i][k] != vct[j][k])
+                        cnt++;
+                if ( cnt == 1)
+                  g[mp[vct[i]]].push_back (vct[j]);
+            }
+         }
+  cin.ignore();
+  while(getline ( cin , s) && s != "")
+  {
+    string start , end;
+    int line = s.find (" ");
+    start  = s.substr(0 , line);
+    end =  s.substr ( line + 1);
+    cout << start <<" "<< end<<" "<< bfs ( start , end)<< endl;
+  }
+  if ( tt + 1 < t)
+   cout << endl;  
+  }
+  return 0;
+}
