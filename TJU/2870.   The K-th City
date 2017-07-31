@@ -1,0 +1,71 @@
+#include<iostream>
+#include<stdio.h>
+#include<queue>
+#include<vector>
+#include<algorithm>
+#include<memory.h>
+using namespace std;
+int const N = 201;
+int const M = 2 * 1e9 + 1;
+int n , m;
+bool vis[N];
+pair<int, int> cost[N];
+vector < vector < pair < int , int > > > g;
+priority_queue<pair < int , int > > q;
+void Dijkstra()
+{
+  int v , c;
+  memset(vis, false, sizeof vis);
+  while ( !q.empty() ) q.pop();
+  for ( int i = 0 ; i < n ; ++i)
+  {
+    cost[i].first = M;
+    cost[i].second = i;
+  }
+  cost[0].first = 0;
+  cost[0].second = 0;
+  q.push(make_pair(0, 0));
+  
+  while ( !q.empty())
+  {
+    v =  q.top().second;
+    c = -q.top().first;
+    q.pop();
+    if (vis[v]) continue;
+    vis [v] = true;
+    for ( int i= 0 ; i < g[v].size() ; ++i)
+    {
+      if (g[v][i].second + c < cost[g[v][i].first].first)
+      {
+        cost[g[v][i].first].first = g[v][i].second + c;
+       q.push(make_pair(-cost[g[v][i].first].first, g[v][i].first));
+       }
+    }
+  }
+
+  
+}
+
+int main()
+{
+  int  u , v , c ;
+  while ( scanf ("%d" , &n) && n )
+  {
+    scanf ("%d" , &m);
+    g.clear();
+    g.resize(n);
+    for ( int i = 0 ; i < m ; ++i)
+      {
+        scanf ("%d%d%d" , &u , &v , &c);
+        g[u].push_back( make_pair ( v , c));
+        g[v].push_back( make_pair ( u , c));
+      }
+      Dijkstra();
+    scanf ("%d" , &v);
+    sort( cost , cost + n);
+    printf ("%d\n" , cost[v].second);
+  }
+  
+  
+  return 0;
+}
