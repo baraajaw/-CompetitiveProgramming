@@ -1,0 +1,51 @@
+#include<iostream>
+#include<algorithm>
+#include<string>
+#include<vector>
+#include<map>
+#include<stdio.h>
+#include<memory.h>
+#include<cctype>
+using namespace std;
+
+int n , k;
+int p[110], f[110];
+int dp[110][15000];
+int rec ( int i , int sum )
+{
+   
+   if ( sum - 200 > k)
+        return -1e9;
+        
+   //if ( sum - 200 <= k && sum > 2000)
+     //  return 0;    
+        
+  if ( i == n )
+        {
+           if ( sum - 200 <= k && sum > 2000)
+          return 0;  
+          if ( sum <= k)
+          return 0;
+          return -1e9;
+        }
+ 
+ 
+  if  ( dp[i][sum] != -1)
+        return dp[i][sum];
+  
+  return dp[i][sum] = max ( rec ( i + 1 , sum ) ,  f[i] + rec ( i + 1 , sum + p[i] ));      
+}
+int main()
+{
+    int a , b;
+    while ( scanf ("%d%d" , &k, &n) != EOF){
+       memset (dp , -1 , sizeof dp);
+     for ( int i = 0 ; i < n ; ++i)
+         scanf ("%d%d" , &p[i] , &f[i]);
+         
+     printf ("%d\n" , rec  ( 0 , 0 )); 
+      
+    }
+  
+  return 0;
+}
