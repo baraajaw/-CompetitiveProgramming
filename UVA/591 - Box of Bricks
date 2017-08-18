@@ -1,0 +1,37 @@
+#include<iostream>
+#include<string>
+#include<stdio.h>
+#include<memory.h>
+using namespace std;
+int const N = 60;
+int main(){
+  
+  int n , sum = 0 , cnt = 0 , res = 0;
+  int arr[N];
+  
+  int t = 1;
+  while ( scanf ("%d" , &n) && n != 0){
+    sum = 0 ;
+    res = 0 ;
+    cnt = 0 ;
+    
+    for ( int i = 0 ; i < n ; ++i){
+      scanf ("%d" , &arr[i]);
+      sum += arr[i];
+    }
+    
+    cnt = sum / n;
+    
+    for ( int i = 0 ; i < n ; ++i ){
+      res += abs( arr[i] - cnt);
+    }
+    
+    printf("Set #%d\n" , t++);
+    printf("The minimum number of moves is %d.\n" , res / 2);
+    puts("");
+  }
+  
+  
+  
+  return 0;
+}
