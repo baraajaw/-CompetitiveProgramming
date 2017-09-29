@@ -1,0 +1,80 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <sstream>
+#include <iomanip>
+#include <cmath>
+#include <cctype>
+#include <algorithm>
+#include <set>
+#include <queue>
+#include <stack>
+#include <map>
+#include <vector>
+#include <cstdio>
+#include <bitset>
+using namespace std;
+int const N = 1e5 + 1;
+int main(){
+
+
+  freopen ("in" , "r" , stdin);
+  int frqs[26] , frqc[26] , unders = 0;
+  int x , tmp = 0;
+  string s , c = "";
+  vector < pair < char , int >  > vc , sort_vc;
+  vector < pair < int , char > > v;
+  map < pair < char , int > , int > mp;
+
+  for ( int i = 0 ; i < 26 ; ++i){
+    frqs[i] = 0;
+    frqc[i] = 0;
+  }
+
+  scanf ("%d" , &x);
+  
+  cin >> s;
+
+ for (int i = 0; i < s.size(); ++i){
+  if ( isalpha (s[i])){
+    if ( isupper(s[i])){    
+  vc.push_back( make_pair ( s[i], frqc[ s[i] - 'A'] ));
+  mp[make_pair ( s[i], frqc[ s[i] - 'A'] )] = i;
+  sort_vc.push_back( make_pair ( s[i], frqc[ s[i] - 'A']++));
+   }
+    else if ( islower(s[i])){
+   vc.push_back( make_pair ( s[i], frqs[ s[i] - 'a'] ));
+     mp[make_pair ( s[i], frqs[ s[i] - 'a']) ] = i;
+   sort_vc.push_back( make_pair ( s[i], frqs[ s[i] - 'a']++ ));
+}
+    
+ }
+ else if  ( s[i] == '_'){
+    vc.push_back( make_pair ( s[i] , unders ));
+    mp[make_pair ( s[i], unders  )] = i;  
+    sort_vc.push_back( make_pair ( s[i] , unders++ ));
+ }
+}
+
+ sort ( sort_vc.begin() , sort_vc.end());
+/*for ( int i = 0 ; i < vc.size() ; ++i){
+  cout << vc[i].first <<"  "<< vc[i].second<<"  ";
+  cout << sort_vc[i].first <<"  "<< sort_vc[i].second<< endl;
+}
+*/
+ c += sort_vc[x - 1].first;
+ int inde = mp[ make_pair ( sort_vc[x - 1].first ,sort_vc[x - 1].second)];
+ for ( int i =  1  ; i < s.size() ; ++i){
+
+   pair < char , int > p = make_pair ( sort_vc [inde].first , sort_vc[inde].second);
+    c += p.first;
+  inde = mp[make_pair (p.first , p.second)];
+  v.push_back ( make_pair ( i + 1 , vc[i].first));
+ }
+  
+ 
+cout << c << endl;
+
+   
+  return 0;
+}
