@@ -1,0 +1,83 @@
+#include<iostream>
+#include<string>
+#include<queue>
+#include<map>
+#include <vector>
+#include<algorithm>
+#include<stdio.h>
+#include<cmath>
+using namespace std;
+using namespace std;
+
+int n, q, len, sol;
+char s[81];
+bool vis[100001];
+
+struct trie {
+  bool isEnd;
+  int prefixes;
+  trie *nxt[26];
+  
+  trie() {
+    isEnd = false;
+    prefixes = 0;
+    for(int i = 0; i < 26; i++)
+      nxt[i] = NULL;
+  }
+};
+
+trie *root;
+
+void insert() {
+  trie *cur = root;
+  
+ // len = strlen (s);
+  for(int i = 0, num; s[i] != '\0'; ++i) {
+    num = s[i] - 'a';
+
+    if(cur->nxt[num] == NULL)
+      cur->nxt[num] = new trie();
+
+    cur = cur->nxt[num];
+    ++cur->prefixes;
+  }
+
+cur -> isEnd = true;
+}
+int total = 0;
+void freeTrie(trie *cursor, int pre_prefixes) {
+
+
+ if( pre_prefixes != cursor -> prefixes){
+    total += cursor-> prefixes;
+ } 
+ for(int i = 0; i < 26; i++)
+    if(cursor->nxt[i] != NULL)
+      freeTrie(cursor->nxt[i], cursor->prefixes);
+  delete[] cursor;
+
+}
+int main() {
+
+ // freopen ( "in" , "r" , stdin);
+  
+
+  while ( cin >> n){
+
+  root = new trie();
+
+    for ( int i = 0 ; i < n ; ++i){
+        
+        scanf ("%s" , s);
+         insert();
+  }
+   
+
+  freeTrie ( root , 0);
+   printf("%.2lf\n", 1.0 * total / n);
+   total = 0;
+  }
+
+  return 0;
+    
+}
