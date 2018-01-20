@@ -1,0 +1,48 @@
+#include<bits/stdc++.h>
+using namespace std;
+int const N = 1e5 + 2;
+
+int main(){
+  
+  int n , a[N] , last[N] , diff[N] , fr[N];
+  map < int , int> mp;
+  map < int , int > :: iterator it;
+  bool fail[N];
+  for ( int i = 0 ; i < N ; ++i){
+    fr[i] = 0;
+    last[i] = 0;
+    diff[i] = 0;
+    fail[i] = false;
+  }
+  
+  scanf("%d" , &n);
+  
+  for ( int i = 0 ; i < n ;++i)
+     scanf("%d" , a + i);
+  
+  
+  for ( int i = 0 ; i  < n ; ++i){
+    if ( fr[a[i]] >= 2){
+      int tmp = i - last[a[i]];
+      if (tmp != diff[a[i]])
+          fail[a[i]] =  true;
+    }
+    else if ( fr[a[i]] == 1)
+      diff[a[i]] = i - last[a[i]];
+
+    last[a[i]] = i; 
+    fr[a[i]]++;
+  }
+  for ( int i = 0 ; i < n ; ++i){
+    if ( fr[a[i]] > 0 && !fail[a[i]])
+       mp[a[i]] = diff[a[i]];
+  }
+  
+  printf("%d\n" , mp.size());
+  for ( it = mp.begin() ; it != mp.end() ; ++it)
+    printf("%d %d\n" , it->first , it -> second);
+  
+  
+  
+return 0;  
+}
