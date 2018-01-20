@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int const N = 1e6 + 1;
+char s[N];
+bool isa[N] , isb[N];
+ll cur , a  ,b  , len;
+
+ll fst(ll n, ll p) {
+  if(p == 0)
+    return 1;
+  ll ret = fst(n, p >> 1);
+  ret = ret * ret % b;
+  if(p & 1)
+    ret = ret * n % b;
+  return ret;
+}
+
+
+int main(){
+    srand(time(NULL));
+
+  scanf("%s\n%d %d", s, &a, &b);
+  len = strlen(s);
+
+  cur = 0;
+  for(int i = 0; i < len; ++i) {
+    cur *= 10;
+    cur %= a;
+    cur += s[i] - '0';
+    cur %= a;
+    if(cur == 0)
+      isa[i] = true;
+  }
+
+   cur = 0;
+  for(int i = len - 1; i >= 0; --i) {
+    cur = (((s[i] - '0') * fst(10, (len - i) - 1)) % b + cur) % b;
+    if(cur == 0)
+      isb[i] = true;
+  }
+ 
+   for(int i = 0; i < len - 1; ++i) {
+    if(isa[i] && isb[i + 1] && s[i + 1] != '0') {
+      puts("YES");
+      for(int j = 0; j <= i; ++j)
+        putchar(s[j]);
+      puts("");
+      for(int j = i + 1; j < len; ++j)
+        putchar(s[j]);
+      puts("");
+      return 0;
+    }
+  }
+  
+  puts("NO");
+  
+  
+  
+  return 0;
+}
