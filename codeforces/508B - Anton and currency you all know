@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+#include <algorithm> 
+#include <stdio.h>
+#include <cmath>
+using namespace std;
+
+ int main() {
+
+ // freopen ("in" , "r" , stdin);
+
+    string s;
+    int freq[10];
+    vector < pair < int , int >  > vc;
+    for ( int i = 0 ; i < 10 ; ++i)
+           freq[i] = 0;
+    cin >> s;
+
+    for ( int i = 0 ; i < s.size() ; ++i){
+      
+      if ( (s[i] - '0') % 2 == 0)
+        vc.push_back( make_pair ( i , s[i] - '0'));
+      freq [ s[i] - '0']++;
+    }
+    if ( freq[2] <= 0 && freq[4] <= 0 && freq[6] <= 0 && freq[0] <= 0 && freq[8] <= 0){
+      puts ("-1");
+      return 0;
+    }
+  
+  int tmp = s[s.size() - 1] - '0' , a = -1;
+  
+   for (int i = 0; i < vc.size() ; ++i){
+      if ( vc[i].second < tmp)
+      {
+        a = vc[i].first;
+        break;
+      }
+    } 
+    if( a == -1)
+      a = vc[vc.size() - 1].first;
+
+   int  tmpre = s[a]; 
+   s[a] = s[s.size() - 1] ;
+   s[s.size() - 1] = tmpre;
+
+   cout << s << endl;
+  return 0;
+     }
