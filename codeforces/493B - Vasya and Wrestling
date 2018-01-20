@@ -1,0 +1,85 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+#include <map>
+#include <memory.h>
+using namespace std;
+/*
+ Fight for your dream , don't give up 
+  */
+int const N = 1e5 * 2 + 1;
+int main(){
+
+
+//freopen ( "in" , "r" , stdin);
+
+int n , x ,y , arr[N] , arr2[N] , ind = 0 , ind2 = 0;
+long long s1 = 0 , s2 = 0;
+bool f = true , ok = true;
+scanf ("%d" , &n);
+
+for ( int i = 0 ; i < n ; ++i){
+   scanf ("%d" , &x);
+   if ( x < 0){
+    arr2[ind2++] = -1 * x;
+    s2 += -1 * x;
+  }
+  else{
+    arr[ind++] = x;
+    s1 += x;
+  }
+  y = x;
+}
+
+if ( s2 > s1 )
+  puts ("second");
+else if ( s1 > s2 )
+    puts("first");
+else{
+  
+  int j  = 0;
+  for ( int i = 0 ; i < ind2 + 1  && j < ind + 1; ++i ){
+       if ( arr2[i] > arr[j]){
+        f = false;
+        ok = false;
+        break;
+       }
+       if ( arr[j] > arr2[i] ){
+        f = true;
+        ok = false;
+        break;
+       }
+       j++;
+     }
+
+    if ( ok){
+     if ( ind  < ind2 )
+      puts ("second");
+    else if ( ind2 < ind)
+       puts("first");
+    else{
+         if ( y > 0)
+          puts("first");
+        else
+          puts ("second");
+    } 
+    }
+    else{
+        if ( f )
+          puts("first");
+        else
+          puts ("second");
+    }   
+
+}  
+
+
+
+
+  return 0;
+    
+}
