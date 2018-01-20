@@ -1,0 +1,59 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+#include <map>
+#include <memory.h>
+using namespace std;
+
+int main(){
+
+
+//freopen ( "in" , "r" , stdin);
+
+int p , q , l , r , x , y , ans = 0;
+vector < pair < int , int > > v , v1;
+
+scanf("%d%d%d%d" , &p , &q , &l , &r);
+
+for ( int i = 0 ; i < p ;++i){
+   scanf ("%d%d" , &x , &y);
+   v.push_back( make_pair ( x , y));
+}
+
+for ( int i = 0 ; i < q ; ++i){
+  scanf ("%d%d" , &x , &y);
+   v1.push_back( make_pair ( x , y));
+}
+for ( int i = l ; i <= r ; ++i){
+    bool check = false;
+
+  for ( int j = 0 ; j < v1.size() ; ++j){
+
+    int a = v1[j].first + i;
+    int b = v1[j].second + i;
+
+    for ( int k = 0 ; k < v.size() ; ++k){
+
+      int c = v[k].first , d = v[k].second;
+
+        if((a <= c && b >= c) || (a <= d && b >= d) || (a>=c && b<=d)){
+          check = true;
+        }
+    }
+    
+  }
+  if ( check)
+      ans++;
+} 
+
+ 
+ printf("%d\n", ans);
+   
+
+  return 0;
+    
+}
