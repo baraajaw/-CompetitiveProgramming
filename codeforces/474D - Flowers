@@ -1,0 +1,56 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+#include <map>
+#include <memory.h>
+using namespace std;
+int const N = 1e5 + 1;
+int const Mod = 1000000007;
+int t , k;
+long long dp[N];
+
+long long cal ( int cur){
+
+ if(cur == 0)
+    return 1;
+
+if ( cur < 0)
+	 return 0;
+
+long long &ret = dp[cur];
+if ( ret != -1)
+   return ret;
+ret = 0;   	
+
+ret += ( cal ( cur - 1) % Mod + cal(cur - k) % Mod) % Mod;
+
+return ret;
+
+}
+int main(){
+
+  	
+ //freopen ( "in" , "r" , stdin);
+ int a , b;
+ scanf("%d%d" , &t , &k);
+
+  memset ( dp , -1 , sizeof dp);
+
+  for ( int i = 1 ; i < N ; ++i)
+       cal(i);
+
+  for(int i = 1; i < N; ++i)
+    dp[i] += dp[i - 1]; 
+
+ for ( int i = 0 ; i < t ; ++i){
+ scanf ("%d%d" , &a , &b);
+ printf("%d\n", (int)  (( dp[b] - dp[ a - 1 ]) % Mod) );
+}
+
+ 
+	return 0;
+	}
