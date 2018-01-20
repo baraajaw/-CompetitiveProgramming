@@ -1,0 +1,53 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+using namespace std;
+int const N = 1e6 + 2;
+bool prime[N];
+
+void sieve() {
+  prime[0] = prime[1] = true;
+  
+  for(int i = 4; i <= N; i++)
+    prime[i] = i % 2 == 0;
+  
+  for(int i = 3; i * i <= N; i += 2)
+    if(!prime[i])
+      for(int j = i * i; j <= N; j += i + i)
+        prime[j] = true;
+}
+
+int main(){
+ 
+
+    sieve();
+   
+   //freopen ("in" , "r" , stdin);
+   int n; 
+   long long x;
+   scanf ("%d" , &n);
+
+   for ( int i = 0 ; i < n ; ++i){
+          scanf("%lld" , &x);
+
+     long long tmp =  ceil ( sqrt (x)) ;
+
+     if ( tmp * tmp != x)
+      puts ("NO");
+     else{
+      if ( prime[tmp] == false)
+        puts("YES");
+      else
+          puts ("NO");
+     }
+
+   }
+ 
+      
+  return 0;
+    
+} 
