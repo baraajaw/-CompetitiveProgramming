@@ -1,0 +1,56 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+#include <map>
+#include <memory.h>
+using namespace std;
+/*
+ Fight for your dream , don't give up 
+  */
+int main(){
+
+
+//freopen ( "in" , "r" , stdin);
+
+int ones , zeros ;
+
+scanf ("%d%d" , &zeros , &ones);
+
+if ( zeros - 1 > ones){
+   puts ("-1");
+   return 0;
+ }
+
+if ( ceil (ones / 2.0) > zeros + 1 ){
+  puts("-1");
+  return 0;
+} 
+
+int tmp = zeros , tmp2 = ones;
+string s = "";
+
+while ( tmp > 0 && tmp2 > 0){
+  if ( tmp2 - 2 > tmp - 1){
+      tmp2 -= 2;
+      s += "110";
+    }
+  else{
+     tmp2--;
+     s += "10";
+   }
+ tmp--;
+}
+while(tmp2-- > 0)
+ s+= '1';
+ if( tmp > 0)
+  s = "0" + s;
+
+cout << s << endl; 
+
+  return 0;
+    
+}
