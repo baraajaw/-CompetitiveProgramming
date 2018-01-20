@@ -1,0 +1,19 @@
+#include<bitset>
+#include<iostream>
+#include<stdio.h>
+using namespace std;
+
+int main() {
+
+  long long  n , m , a , b , min , max;
+  
+  scanf ("%lld%lld" , &n , &m);
+  
+  a = n / m;
+  b = n % m;
+  max = ( n - m + 1) * ( n - m) / 2;
+  min = ( m * a ) * ( a - 1 ) / 2 + ( a * b);
+  
+  cout <<min <<" "<<max<< endl;
+  
+}
