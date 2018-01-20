@@ -1,0 +1,61 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+#include <map>
+#include <memory.h>
+using namespace std;
+int main(){
+	//freopen ( "in" , "r" , stdin);
+
+	 
+
+	  int n , s  , Max = 0 , Min = 0;
+	  pair < int , int > arr[31];
+	  vector<int> a;
+	  scanf("%d%d" , &n , &s);
+	  
+	  a.resize(n);
+
+	  for ( int i = 0 ; i < n ; ++i){
+	  	  scanf ("%d%d" , &arr[i].first , &arr[i].second);
+	  	  Min += arr[i].first;
+	  	  Max += arr[i].second;
+	  }
+	  
+
+	  if ( Min <= s  && Max >= s){
+	  	puts("YES");
+
+	  	int tmp = s / n , tmpsum = s;
+	  	for ( int i = 0 ; i < n ; ++i){
+	 	 tmpsum -= arr[i].first;
+	 	 a[i] = arr[i].first;
+	    }
+
+      
+	   if ( tmpsum > 0){
+	 	for ( int i = 0 ; i < n ; ++i)
+	 		if ( a[i] < arr[i].second){
+	 			int t = tmpsum;
+
+	 			tmpsum -= arr[i].second - a[i];
+	 			//cout << tmpsum << endl;
+	 			a[i] += min ( t , arr[i].second - a[i]);
+	 			if ( tmpsum <= 0)
+	              	break;
+	 		}}
+	   for ( int i = 0 ; i < n ; ++i)
+	 		printf("%d ", a[i] );
+	 	puts("");
+	  }
+	  else
+	  	puts ("NO");
+
+
+
+	return 0;
+	}
