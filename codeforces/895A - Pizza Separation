@@ -1,0 +1,44 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+#include <map>
+#include <memory.h>
+using namespace std;
+int const N = 1e6 + 2;
+int main(){
+
+
+//freopen ( "in" , "r" , stdin);
+
+int n , arr[261] , sum = 0;
+vector< int > v1 , v2 , v3;
+scanf("%d" , &n);
+
+v1.resize(n);
+
+for ( int i = 0 ; i < n ; ++i){
+    scanf("%d" , &v1[i]);
+    sum += v1[i];
+  }
+ 
+for ( int i = 0 ; i < n ; ++i){
+  int sm = 0;
+  for ( int j = i ; j < n ; ++j){
+        sm += v1[j];
+        v2.push_back(sm);
+      }
+}
+
+int ans = 360;
+for ( int i = 0 ; i < v2.size() ; ++i){
+  ans = min ( ans , abs ( sum - v2[i] -v2[i]));
+}
+
+printf("%d\n", ans );
+  return 0;
+    
+}
