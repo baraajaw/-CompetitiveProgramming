@@ -1,0 +1,50 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+#include <map>
+#include <memory.h>
+using namespace std;
+/*
+ Fight for your dream , don't give up 
+  */
+
+int main(){
+
+
+//freopen ( "in" , "r" , stdin);
+
+int n , k , arr[101] , Max = 0 , Min = 101;
+
+scanf("%d%d" , &n , &k); 
+for ( int i = 0 ; i < n ; ++i){
+    scanf("%d" , &arr[i]);
+    Max = max ( Max , arr[i]);
+    Min = min ( Min , arr[i]);
+  }
+
+  if (Max - Min > k){
+    puts("NO");
+    return 0;
+  }
+
+  int c = 1;
+  
+  puts("YES");
+  for ( int i = 0 ; i < n ; ++i){
+     c = 1;
+    for ( int j = 1 ; j <= arr[i] ; ++j){
+      printf("%d ", c++);
+      if ( c > k)
+        c = 1;
+    }
+    puts("");
+  }
+
+
+  return 0;
+    
+}
