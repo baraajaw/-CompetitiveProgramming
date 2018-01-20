@@ -1,0 +1,28 @@
+#include<bitset>
+#include<iostream>
+using namespace std;
+int const N = 1001;
+int main()
+{
+
+  int n , m , k , arr[N] , count = 0 , res = 0; 
+  scanf ("%d%d%d" , &n , &m , &k);
+  
+  for (int i = 0 ; i < m + 1 ; ++i)
+     scanf ("%d" , &arr[i]);
+  bitset < 32 > marr(arr[m]);
+  
+  for ( int i = 0 ; i < m ; ++i){   
+     
+     bitset <32> tmparr (arr[i]);
+     for ( int j = 0 ; j < 32 ; ++j)
+         {
+           if ( marr[j] != tmparr[j])
+              count++;
+         }
+    if ( count <= k)
+       res++;
+    count = 0;   
+  }
+	cout << res << endl;
+}
