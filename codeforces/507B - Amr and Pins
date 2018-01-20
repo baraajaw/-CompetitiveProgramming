@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <vector>
+#include <memory.h>
+#include <algorithm>
+#include<string>
+#include <iostream>
+#include <cmath>
+using namespace std;
+int main() {
+ 
+   //freopen ("in" , "r" , stdin);
+   
+
+     int  x1 , y1 , x2 , y2;
+     double r;
+
+     scanf ("%lf%d%d%d%d" , &r , &x1 , &y1 , &x2 , &y2);
+
+      double dis = sqrt ( pow (x2 - x1 , 2.0) + pow ( y2 - y1 , 2.0));
+    
+      cout << ceil ( dis / (2.0 * r))<< endl;
+
+
+      return 0;  
+     }
