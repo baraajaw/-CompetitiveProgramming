@@ -1,0 +1,47 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <algorithm>
+using namespace std;
+int main(){
+   
+
+    //freopen ( "in" , "r" , stdin);
+
+    int n , inde = -1;
+    vector < int > vc , v;
+    
+    scanf ("%d" , &n);
+    vc.resize(n);
+
+    for ( int i = 0 ; i < n ; ++i)
+          scanf ("%d" , &vc[i]);
+
+    for ( int i = 1 ; i < n ; ++i){
+      if ( vc[i] < vc[i - 1]){
+         inde = i;
+       break;
+       }
+    }
+    if ( inde == -1)
+        puts("0");
+    else{
+      for ( int i = inde ; i < n ; ++i)
+         v.push_back ( vc[i]);
+       for ( int i = 0 ; i < inde ; ++i)
+           v.push_back( vc[i]);
+
+     for ( int i = 0 ; i < v.size() - 1 ; ++i)
+          if ( v[i] > v[i + 1]){
+            puts("-1");
+             return 0;
+           }
+      
+       printf("%d\n", n - inde );        
+    }  
+
+
+
+  return 0;
+}
