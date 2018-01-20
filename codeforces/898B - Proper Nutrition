@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+  
+  int n , a , b , ansa = -1 , ansb = -1;
+  int cnt = 0 ;
+ scanf ("%d%d%d" , &n  , &a , &b);
+ 
+ int tmp = n;
+ 
+ while ( tmp % b != 0 && tmp >= 0){
+   cnt++;
+   tmp -= a;
+ }
+ if ( tmp >= 0){
+     puts("YES");
+    printf("%d %d\n" , cnt , tmp/b); 
+    return 0;
+ }
+ 
+  tmp = n;
+ 
+ while ( tmp % a != 0 && tmp >= 0){
+   cnt++;
+   tmp -= b;
+ }
+   if ( tmp >= 0){
+     puts("YES");
+    printf("%d %d\n" , tmp / a , cnt); 
+    return 0;
+ }
+  
+  puts("NO");
+   return 0;
+}
