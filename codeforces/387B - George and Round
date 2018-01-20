@@ -1,0 +1,52 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+#include <map>
+#include <memory.h>
+using namespace std;
+/*
+ Fight for your dream , don't give up 
+  */
+
+int const N = 1e6 + 2;
+int main(){
+
+
+//freopen ( "in" , "r" , stdin);
+
+int  n , m , arr[ 3001] , arr2[3001] , ans = 0;
+
+
+scanf ("%d%d" , &n , &m);
+
+ for (int i = 0; i < n ; ++i)
+     scanf("%d" , &arr[i]);
+
+ for (int i = 0; i < m; ++i)
+  scanf("%d" , &arr2[i]);
+  
+sort ( arr2 , arr2 +m);
+sort ( arr , arr + n);  
+
+
+for ( int j = 0 ; j < n ; ++j)  
+ for ( int i = 0 ; i < m ; ++i)
+   if  ( arr2[i] >= arr[j]){
+    arr2[i] = -1;
+    arr[j] = -1;
+    break;
+  }
+  
+
+for ( int i = 0 ; i < n ; ++i)   
+     if ( arr[i] != -1)
+       ans++;
+
+printf("%d\n", ans );
+  return 0;
+    
+}
