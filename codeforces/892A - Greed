@@ -1,0 +1,46 @@
+
+ #include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+#include <map>
+#include <memory.h>
+using namespace std;
+
+
+int main(){
+
+
+//freopen ( "in" , "r" , stdin);
+  int n; 
+  long long sum = 0;
+ vector < int > vc1 , vc2;
+
+  scanf ("%d" , &n);
+
+  vc1.resize(n);
+  vc2.resize(n);
+
+  for (int i = 0; i < n; ++i){
+    scanf("%d" , &vc1[i]);
+    sum += vc1[i];
+  }
+
+  for (int i = 0; i < n; ++i)
+    scanf("%d" , &vc2[i]);
+
+  
+  sort ( vc2.begin() , vc2.end());
+  
+  if ( sum <= (long long ) vc2[vc2.size() - 1]+ vc2[vc2.size() - 2])
+     puts ("YES");
+  else
+  puts ("NO"); 
+
+
+  return 0;
+    
+} 
