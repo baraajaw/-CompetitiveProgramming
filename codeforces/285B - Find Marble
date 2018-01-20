@@ -1,0 +1,44 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <algorithm>
+using namespace std;
+int mod = 1000000007;
+int main(){
+   
+
+    //freopen ( "in" , "r" , stdin);
+
+ 
+   int n , a , b , res = 0 , cnt = 0;
+   vector < int > vc , v1 , v2;
+   scanf ("%d%d%d" , &n , &a , &b );
+
+    vc.resize(n + 1);
+   for ( int i = 1 ; i <= n ; ++i)
+     scanf("%d" , &vc[i]);
+
+     
+     
+    if ( a == b)
+       puts ("0");
+     else{
+  
+   while ( cnt < n){
+     
+     if ( a == b)
+     {
+      cout << cnt << endl;
+        return 0;
+     }
+     a = vc[a];
+       cnt++;
+   }
+    puts("-1");
+    
+ }
+
+
+  return 0;
+} 
