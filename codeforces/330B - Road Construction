@@ -1,0 +1,75 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+#include <map>
+#include <memory.h>
+using namespace std;
+
+
+
+int main(){
+//freopen ( "in" , "r" , stdin);
+
+int n , m , a , b;
+vector<int> v;
+vector < vector< int > > vc;
+vector < pair < int , int > > ans;
+
+scanf ("%d%d" , &n , &m);
+
+v.resize(n + 1);
+vc.resize(n + 1);
+for ( int i = 0 ; i <= n ; ++i)
+   v[i]= 0;
+
+
+for ( int i = 0 ; i < m ; ++i){
+  scanf ("%d%d" , &a , &b);
+  v[a]++;
+  v[b]++;
+  vc[a].push_back(b);
+  vc[b].push_back(a);
+}
+
+for ( int i = 0 ; i < vc.size() ; ++i)
+    sort ( vc[i].begin() , vc[i].end());
+
+
+int last = 0 , min = 1e4;
+for ( int i = 1 ; i < v.size() ; ++i)
+   if ( v[i] < min){
+    min = v[i];
+    last = i;
+   }
+
+vector < int > res;
+
+for ( int i = 1 ; i <= n ; ++i)
+  if ( !binary_search ( vc[last].begin() , vc[last].end() , i) && i != last ) 
+    res.push_back(i);
+
+
+for ( int i = 1 ; i <= n ; ++i){
+  if ( !binary_search ( res.begin() , res.end() , i) && i != last)
+     for ( int j = 0 ; j < res.size() ; ++j)
+        if ( !binary_search ( vc[i].begin() , vc[i].end() , j)){
+          ans.push_back(make_pair ( i , j));
+          break;
+        }
+}  
+int l = ans.size() + res.size(); 
+
+  printf("%d\n", l);
+for ( int i = 0 ; i < ans.size() ; ++i)
+  cout << ans[i].first <<" "<<ans[i].second<< endl;
+
+for ( int i = 0 ; i < res.size() ; ++i)
+  cout << res[i] <<" "<< last << endl;
+  
+  return 0;
+    
+}
