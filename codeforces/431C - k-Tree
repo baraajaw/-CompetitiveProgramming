@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+int const M = 1e9 + 7;
+
+int n , k , d , dp[10001][2];
+
+int rec ( int sum , bool ok){
+ 
+  if ( sum == n)
+     return ok;
+     
+  if ( sum > n)
+     return 0;
+     
+  int &ret = dp[sum][ok];
+  if ( ret != -1)
+      return ret;
+  ret = 0;
+  
+  for ( int i = 1 ; i <= k ; ++i)
+     ret =  (( ret % M) + rec ( sum + i ,  ok || i >= d) % M ) % M;
+  
+  return ret;
+}
+
+int main(){
+	
+	
+	scanf("%d%d%d" , &n , &k , &d);
+	memset ( dp , -1 , sizeof dp);
+  printf ("%d\n" , rec ( 0 , 0) );
+
+	return 0;
+	}
