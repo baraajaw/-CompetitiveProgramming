@@ -1,0 +1,83 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <map>
+#include <algorithm>
+#include<set>
+using namespace std;
+int const N = 200000;
+map < int , int > mp;
+set < pair <int , int > > st , st2;
+set < int > s;
+set < int > :: iterator it2 , it3;
+set < pair < int , int > > :: iterator it;
+int main() {
+
+
+  int n , arr[N] , pre = -1, cnt = 0;
+  scanf("%d" , &n);
+
+  for ( int i = 0 ; i < n ; ++i)
+	  scanf("%d" , &arr[i]);
+
+  pre = arr[0]; cnt = 1;
+
+  for ( int i = 1 ; i < n ; ++i){
+       if ( arr[i] == pre)
+    	   cnt++;
+       else{
+    	   st.insert(make_pair(-cnt , abs(i - cnt)));
+    	   s.insert(abs ( i - cnt));
+    	   mp[abs ( i - cnt )] = cnt;
+    	   cnt = 1;
+    	   pre = arr[i];
+       }
+  }
+  if ( cnt >= 1){
+	   st.insert(make_pair(-cnt , abs(n - cnt)));
+	   s.insert(abs ( n - cnt));
+	   mp[abs ( n - cnt )] = cnt;
+  }
+
+
+  long long ans = 0;
+  cnt = 0;
+
+
+
+  while ( !st.empty()){
+	  cnt = 0;
+	  pair< int , int > a = *st.begin();
+	  int b = a.second;
+	  if ( !s.count(b)){
+		  st.erase(st.begin());
+		  continue;
+	  }
+	st.erase(st.begin());
+    ans++;
+    s.erase(b);
+    it2 = s.upper_bound(b);
+
+    if( it2 ==s.end()||it2 ==s.begin())
+    	  continue;
+
+
+
+      it3 = it2;
+      it3--;
+
+      if(arr[*it2]!= arr[*it3])
+    	  continue;
+      st.erase(make_pair(-mp[*it2],*it2));
+      st.erase(make_pair(-mp[*it3],*it3));
+      s.erase(*it3);
+      mp[*it2]+=mp[*it3];
+      mp.erase(*it3);
+      st.insert(make_pair(-mp[*it2],*it2));
+      }
+
+
+
+  printf("%lld\n" , ans);
+	return 0;
+}
