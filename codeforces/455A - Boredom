@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+#include <map>
+#include <memory.h>
+using namespace std;
+int const N = 1e5 + 2;
+long long dp[N] ;
+int fr[N];
+long long cal (int i){
+
+   if ( i >= N)
+      return 0;
+
+
+   long long &ret = dp[i];
+    if (ret != -1)
+       return ret;
+        ret = 0;
+
+  
+  if ( fr[i] > 0)
+   ret = cal ( i + 2) + ( 1ll * fr[i] * i) ;
+
+  ret = max ((long long) ret , cal( i + 1));
+
+
+  return ret;
+
+}
+
+
+int main(){
+//freopen ( "in" , "r" , stdin);
+
+
+int n , arr[N] ;
+
+for (int i = 0 ; i < N ; ++i)
+   fr[i] = 0;
+
+scanf("%d" , &n);
+
+for ( int i = 0 ; i < n ; ++i){
+   scanf("%d" , &arr[i]);
+   fr[arr[i]]++;
+ }
+
+ memset(dp , -1 , sizeof dp);
+
+ printf("%lld\n", cal (1));
+
+
+
+
+
+  
+  return 0;
+    
+}
