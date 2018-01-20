@@ -1,0 +1,47 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+#include <map>
+#include <memory.h>
+using namespace std;
+
+int const N = 1e5 + 1;
+int main(){
+
+
+//freopen ( "in" , "r" , stdin);
+
+  int n , t , arr[N];
+  long long  res[N] , sum = 0 , ans = 0;
+  scanf ("%d%d" , &n , &t);
+
+  for ( int i = 0; i < n ; ++i )
+       scanf ("%d" , &arr[i]);
+
+  int r = 0 , l = 0;
+  while ( r < n){
+   
+   if ( sum + arr[r] > t){
+       if ( r - 1 > 0 ) 
+       ans = max ( ans  , (long long ) r - l );
+       sum -= arr[l];
+       l++;
+   }
+   else
+   {
+    
+    sum += arr[r];
+    r++;
+   }
+  }
+  ans = max ( ans , (long long ) r - l);
+
+printf("%lld\n", ans );
+
+  return 0;
+    
+}
