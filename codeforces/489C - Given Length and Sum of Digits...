@@ -1,0 +1,104 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+#include <map>
+#include <memory.h>
+using namespace std;
+ int m , s;
+ string sm = "" , sm2= "" , ls = "";
+ int dp1[101][901] , dp2[101][901];
+ bool f = true;
+ bool  cal ( int tm , int ts){
+  if ( tm == m )
+      return ts == s;
+
+  int & ret = dp1[tm][ts];
+  
+  if ( ret != -1)
+  return ret;
+  ret = 0;
+
+  if ( ts + 9 <= s){
+       sm += '9';
+       if (cal ( tm + 1 , ts + 9))
+          return true;
+   }
+  else{
+      int tmp = s - ts;
+      char c = tmp + '0';
+       sm += c;
+      if (cal ( tm + 1 , ts + tmp))
+          return true;
+  }
+  return false; 
+ }
+
+void cal2 ( int tm , int ts){
+    if ( tm == m ){
+      if ( ts == s && f){
+      ls = sm2;
+      f= false;
+      }
+    return ;
+    }
+ 
+ int & ret = dp2[tm][ts];
+  
+  if ( ret != -1)
+  return ;
+  ret = 0;
+
+ for ( int i = 0 ; i <= 9 ; ++i){
+       int tmp = i;
+       char c = tmp + '0';
+       
+       if ( i == 0 ){
+          if ( s == 0 && m == 1)
+            {
+        sm2 += c;
+       cal2 ( tm + 1 , ts + i);
+     }
+      else if ( sm2 != "")
+        {
+        sm2 += c;
+       cal2 ( tm + 1 , ts + i);
+     }
+   }
+     else{
+       sm2 += c;
+       cal2 ( tm + 1 , ts + i);
+     }
+
+      sm2 = sm2.substr ( 0 , sm2.size() - 1);
+
+}
+}
+
+  
+int const N = 1e5 + 1;
+int main(){
+
+
+//freopen ( "in" , "r" , stdin);
+ 
+ 
+  
+  scanf ("%d%d" , &m , &s);
+
+  memset ( dp1 , -1 , sizeof dp1);
+  memset ( dp2 , -1 , sizeof dp2);
+  bool ok = cal( 0 , 0);
+      cal2 ( 0 , 0);
+
+  if ( ok && ls != "" )
+      cout <<ls<<" "<<sm<<endl;
+  else 
+     puts ("-1 -1");   
+
+  return 0;
+    
+}
