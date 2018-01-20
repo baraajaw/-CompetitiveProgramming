@@ -1,0 +1,102 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+#include <map>
+#include <memory.h>
+using namespace std;
+
+
+int main(){
+	
+//	freopen ( "in" , "r" , stdin);
+ 
+    vector < long long > vc;
+    long long a = 0 , n , md;
+	  
+	 for ( int i = 1 ; i <= 9 ; ++i){
+	 	    a = i;
+	       	a = a * 10 + i;
+	       	vc.push_back (a);
+            a = 0;
+	    for ( int j = 0 ; j <= 9 ; ++j){
+	    	a = i;
+	    	a = a * 10 + j;
+	    	a = a * 10 + j;
+	       	a = a * 10 + i;
+	       	vc.push_back (a);
+            a = 0;
+	       for ( int k = 0; k <= 9 ; ++k ){
+	        a = i;
+	    	a = a * 10 + j;
+	    	a = a * 10 + k;
+	    	a = a * 10 + k;
+	    	a = a * 10 + j;
+	       	a = a * 10 + i;
+	       	vc.push_back (a);
+            a = 0; 
+            for ( int b = 0 ; b <= 9 ; ++b){
+                 a = i;
+	             	a = a * 10 + j;
+	             	a = a * 10 + k;
+	             	a = a * 10 + b;
+	             	a = a * 10 + b;
+	            	a = a * 10 + k;
+	    	        a = a * 10 + j;
+	              a = a * 10 + i;
+	             	vc.push_back (a);
+               a = 0;
+                 for ( int c = 0 ; c <= 9 ; ++c){
+                 a = i;
+	             	a = a * 10 + j;
+	             	a = a * 10 + k;
+	             	a = a * 10 + b;
+	             	a = a * 10 + c;
+	             	a = a * 10 + c;
+	             	a = a * 10 + b;
+	            	a = a * 10 + k;
+	    	        a = a * 10 + j;
+	              a = a * 10 + i;
+	             	vc.push_back (a);
+               a = 0; 
+                for ( int d = 0 ; d <= 9 ; ++d){
+                 a = i;
+	             	a = a * 10 + j;
+	             	a = a * 10 + k;
+	             	a = a * 10 + b;
+	             	a = a * 10 + c;
+	             	a = a * 10 + d;
+	             	a = a * 10 + d;
+	             	a = a * 10 + c;
+	             	a = a * 10 + b;
+	            	a = a * 10 + k;
+	    	        a = a * 10 + j;
+	              a = a * 10 + i;
+	             	vc.push_back (a);
+               a = 0; 
+               
+            } 
+            }
+            }
+	       	}
+	        }
+           
+          
+	       } 
+
+	  sort ( vc.begin() , vc.end());     
+  
+     scanf("%lld%lld" , &n , &md);
+     long long sum = 0;
+    for ( int i = 0 ; i < n ; ++i){
+    	    sum = (( sum % md) + (vc[i] % md)) % md;
+    }
+  
+  
+   printf("%lld\n", sum  % md); 	
+
+	return 0;
+	}
