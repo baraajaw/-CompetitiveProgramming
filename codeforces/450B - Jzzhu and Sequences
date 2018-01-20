@@ -1,0 +1,27 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <algorithm>
+using namespace std;
+int mod = 1000000007;
+int main(){
+   
+
+//    freopen ( "in" , "r" , stdin);
+
+    
+     int x , y , n;
+     scanf ("%d%d%d" , &x , &y , &n);
+     int arr[6] = { x - y , x ,  y ,y - x , -x , -y };
+    
+       
+     if ( arr[ n % 6] <  0)
+     cout <<   (  arr [ n % 6] % mod  + mod )   % mod << endl;
+   else
+     cout << arr[ n % 6] % mod << endl;
+
+
+
+  return 0;
+} 
