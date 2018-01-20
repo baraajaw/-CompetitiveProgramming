@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <algorithm>
+using namespace std;
+int mod = 1000000007;
+int main(){
+   
+
+    //freopen ( "in" , "r" , stdin);
+
+    
+  int n , sum = 0 , h = 0 , x;
+
+  scanf ("%d" , &n);
+
+  for ( int i = 0 ; i < n ; ++i){
+  	scanf ("%d" , &x);
+  	 sum += abs( x - h) + 1;
+  	 h = x;
+  }
+
+  sum += ( n - 1);
+
+  printf("%d\n", sum);
+
+
+  return 0;
+}
