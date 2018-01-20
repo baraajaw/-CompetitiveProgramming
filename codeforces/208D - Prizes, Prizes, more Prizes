@@ -1,0 +1,81 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+#include <map>
+#include <memory.h>
+using namespace std;
+
+
+int main(){
+	
+//	freopen ( "in" , "r" , stdin);
+   
+    long long n, arr[5] , a[51] , ans[5];
+    
+    cin >> n;
+
+    for ( int i = 0 ; i < n ; ++i)
+    	 cin >> a[i];
+
+   for ( int i = 0 ; i < 5 ; ++i){
+        cin >> arr[i];
+        ans[i] = 0; 	  
+   }
+
+  long long sum = 0 , Max = 0 , l = 0 , tmp =0 , ts = 0;
+  bool f = false;
+  
+  for ( int i = 0 ; i < n ; ++i){
+  	    Max = 0 ;
+  	    tmp = a[i] + ts ;
+  	    ts = 0;
+  	   
+  	   
+  	 while ( tmp > 0 && tmp > Max ){
+       for ( int j = 0 ; j < 5 ; ++j){
+     	if ( arr[j] <= tmp )
+     		if ( arr[j] > Max){
+     			Max = arr[j];
+     			l = j;
+     		}	
+     }
+     
+      if ( Max > 0){
+      ans[l] += tmp / Max;
+      tmp %= Max;
+      }
+      else
+      break;
+      Max = 0;
+     }
+     
+     ts = ts + tmp;
+     Max = 0;
+      while ( ts > 0 && ts > Max ){
+     for ( int j = 0 ; j < 5 ; ++j){
+     	if ( arr[j] <= ts )
+     		if ( arr[j] > Max){
+     			Max = arr[j];
+     			l = j;
+     		}	
+     }
+      if (Max > 0){
+      ans[l] += ts / Max;
+      ts %= Max;
+      }
+      else
+      break;
+      Max = 0;
+     }
+  }
+  for ( int i = 0 ; i < 5 ; ++i)
+  	cout << ans[i] <<" ";
+  cout << endl;
+  cout << ts<<endl;
+
+	return 0;
+	}
