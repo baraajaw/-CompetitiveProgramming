@@ -1,0 +1,56 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdio.h>
+#include <cmath>
+#include <algorithm>
+#include <bitset>
+#include <map>
+#include <memory.h>
+using namespace std;
+
+int main(){
+
+
+//freopen ( "in" , "r" , stdin);
+
+  int n , m , res = 0 , tmp = 1;
+  bool f = false;
+  vector < int > vc;
+
+  scanf ("%d%d" , &n , &m);
+
+  vc.resize(m);
+
+  for ( int i = 0 ; i < m ; ++i){
+     scanf("%d" , &vc[i]);
+       if ( vc[i] == 1 || vc[i] == n)
+           f = true;
+       }
+
+  sort ( vc.begin() , vc.end());
+  
+
+  if ( vc.size() > 0 )
+  for ( int i  = 0 ; i < vc.size() - 1 ; ++i){
+       if ( vc[i] + 1 == vc[i + 1])
+           tmp++;
+      else{
+
+          res = max ( res , tmp );
+          tmp = 1;
+         }  
+         }
+    if ( tmp > 1)
+       res = max ( tmp , res);      
+
+ 
+   if ( res > 2 || f )
+    puts("NO");
+  else
+     puts ("YES");
+
+
+  return 0;
+    
+}
