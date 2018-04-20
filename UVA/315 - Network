@@ -1,0 +1,125 @@
+#include <iostream>
+#include <memory.h>
+#include<vector>
+#include<stdio.h>
+#include<algorithm>
+#include<string>
+#include<math.h>
+#include<cmath>
+#include<set>
+#include <queue>
+#include <bitset>
+#include <map>
+#include <iomanip>
+#include <stack>
+#include <ctype.h>
+using namespace std;
+int n;
+int child = 0 , DFSTime = 0; 
+string s;
+vector < vector < int > > g;
+vector<int> idx, low;
+vector<bool> art;
+vector<pair<int, int> > bridges;
+
+
+void DFS( int u, int p) { 
+
+  idx[u] = low[u] = ++DFSTime;
+  
+
+  for(int i = 0; i < g[u].size(); ++i) {
+    int v = g[u][i];
+
+    if(idx[v] == 0) {
+      if(p == -1)
+        ++child;
+
+      DFS(v, u);
+      low[u] = min(low[u], low[v]);
+
+      if(low[v] > idx[u])
+        bridges.push_back(make_pair(u, v));
+
+      if(low[v] >= idx[u])
+        art[u] = true;
+    }
+    else if(v != p)
+      low[u] = min(low[u], idx[v]);
+  }
+}
+
+
+
+int main() {
+
+  freopen ("in" , "r" , stdin);
+  
+  
+
+  while ( scanf("%d\n" , &n)  && n != 0){
+      
+      g.clear();
+      idx.clear();
+      low.clear();
+      art.clear();
+      art.resize(n);
+      idx.resize(n);
+      low.resize(n);
+      g.resize(n);
+      DFSTime = 0;
+      int from , to , tmp = 0 ;
+      bool fir = true;
+      string c ="";
+
+      while ( getline ( cin ,  s) && s != "0"){
+          c= ""; tmp = 0;
+          fir = true;
+           
+            for(int i = 0 ; i < s.size() ; ++i)
+                if ( s[i] != ' ')
+                  c += s[i];
+                else{
+                  for ( int j = 0 ; j < c.size() ; ++j)
+                     tmp = tmp * 10 + (c[j] - '0');
+                  if ( fir){
+                      from = tmp - 1;
+                      fir = false;
+                  }
+                  else{
+                     to = tmp;
+                     to--;
+                     g[from].push_back(to);
+                     g[to].push_back(from); 
+                  }
+                  tmp = 0;
+                  c = "";
+                }
+                for ( int j = 0 ; j < c.size() ; ++j)
+                     tmp = tmp * 10 + (c[j] - '0');
+                to = tmp - 1 ;
+                g[from].push_back(to);
+                g[to].push_back(from);
+
+              } //Finish input Reading
+
+ 
+        for ( int i = 0 ; i < n ; ++i){
+              if ( idx[i] == 0){
+                 DFS(i, -1);
+                art[i] = child > 1;
+                child = 0;
+              }
+            }
+        int ans = 0;
+        for ( int i = 0 ; i < n ; ++i)
+           ans += art[i];
+ 
+ cout << ans << endl;
+}
+
+
+
+  
+  return 0;
+}
