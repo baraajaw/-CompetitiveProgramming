@@ -1,0 +1,130 @@
+#include <iostream>
+#include <memory.h>
+#include<vector>
+#include<stdio.h>
+#include<algorithm>
+#include<string>
+#include<math.h>
+#include<cmath>
+#include<set>
+#include <queue>
+#include <bitset>
+#include <map>
+#include <iomanip>
+#include <stack>
+#include <ctype.h>
+using namespace std;
+
+int n, m, id, DFStime, comp, idx[26], low[26];
+bool in[26];
+string s , c;
+ char ch[27] , sh[27];
+vector<int> st;
+vector<vector<int> > g, comps;
+vector < pair < string , string > > vc;
+map < string , int > :: iterator it ;
+map<string, int> mp;
+map<int, string> mp2;
+
+
+void DFS(int v) {
+
+  low[v] = idx[v] = DFStime++;
+  in[v] = true;
+  st.push_back(v);
+  
+ // cout << mp2[v]<<endl;
+  for(int i = 0; i < g[v].size(); i++)
+    if(idx[g[v][i]] == -1) {
+      DFS(g[v][i]);
+      low[v] = min(low[v], low[g[v][i]]);
+    } else if(in[g[v][i]])
+      low[v] = min(low[v], low[g[v][i]]);
+
+  if(low[v] == idx[v]) {
+    int node;
+    do {
+      node = st.back();
+      in[node] = false;
+      st.pop_back();
+      comps[comp].push_back(node);
+    } while(node != v);
+
+    comp++;
+  }
+}
+
+int main() {
+
+    freopen("in", "r", stdin);
+    int tt= 1;
+
+    while ( scanf ("%d%d" , &n , &m ) && ( n != 0 || m  != 0)){
+    
+     if (tt > 1 ) puts("");
+
+    g.clear();
+    vc.clear();
+    mp.clear();
+    mp2.clear();
+    comps.clear();
+    comps.resize(n);
+    g.resize(n);
+    st.clear();
+    int cnt = 0;
+    string fir = "";
+ 
+   
+ 
+    for ( int i = 0 ; i < m ; ++i){
+         scanf("%s %s" , ch , sh);
+         c = ch;
+         s = sh;
+         mp[c]++;
+         mp[s]++;
+         vc.push_back(make_pair ( c , s));
+    }
+    int t = 0;
+    for ( it = mp.begin() ; it != mp.end() ; ++it  , ++t){
+         it -> second = t;
+         mp2[t] = it -> first;
+     }
+ 
+    for ( int i = 0 ; i < vc.size() ; ++i)
+        g[mp[vc[i].first]].push_back( mp[vc[i].second ] );
+ 
+ 
+    /*for ( int i = 0 ; i < n ; ++i){ 
+        cout << mp2[i] <<" : ";
+       for ( int j = 0 ; j < g[i].size() ; ++j)
+          cout << mp2[g[i][j]]  <<" ";
+       cout << endl; 
+     }*/
+ 
+     memset( in , 0 , sizeof in);
+     memset( idx , -1 , sizeof idx);
+     memset( low , 0 , sizeof low);
+     DFStime = comp = 0 ;
+     printf("Calling circles for data set %d:\n", tt++ );
+
+     for ( int i = 0 ; i < n ; ++i){
+          if ( idx[i] == -1)
+              DFS(i);
+     }
+     for ( int i = 0 ; i < comps.size() ; ++i){
+       
+        if ( comps[i].size() == 0)
+           break;
+       for ( int j = 0 ; j < comps[i].size() ; ++j){
+        printf("%s", mp2[comps[i][j]].c_str());
+         if (j + 1 < comps[i].size())
+          printf(", " );
+       }
+
+       cout << endl;
+     }
+   
+}
+
+  return 0;
+}
