@@ -1,0 +1,35 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <memory.h>
+#include <map>
+#include <stack>
+using namespace std;
+int const N = 2 * 1e5 + 3;
+
+int main() {
+
+  freopen ("in" , "r" , stdin);
+   
+   string  Qwerty =  "`1234567890-=qwertyuiop[]\\asdfghjkl;'zxcvbnm,./ ~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:\"ZXCVBNM<>?";
+   string  Dvorak =  "`123qjlmfp/[]456.orsuyb;=\\789aehtdck-0zx,inwvg' ~!@#QJLMFP?{}$%^>ORSUYB:+|&*(AEHTDCK_)ZX<INWVG\"";
+   map < char , char > mp;
+  char s[101];
+
+  for ( int i = 0 ; i < Dvorak.size() ; ++i)
+       mp[Qwerty[i]] = Dvorak[i];
+  while ( gets(s)){
+    int len = strlen(s);
+    for ( int i = 0 ; i < len ; ++i )
+        s[i] = mp[s[i]];
+
+   cout << s << endl;   
+  }
+
+
+
+return 0;
+}
