@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+#define f2(i, x, n) for(int i = x; i >= n; --i)
+using namespace std;
+int main() {
+  
+  
+  string a, b, ans = "";
+  int fra[26], frb[26];
+  
+  while(getline(cin,a) && getline(cin,b) ){
+  	    
+   		f(i, 0, 26)
+   			fra[i] =frb[i] =0;
+   		f(i, 0, a.size())
+   			fra[a[i]-'a']++;
+   		f(i, 0, b.size())
+   			frb[b[i] -'a']++;
+   		f(i, 0, 26){
+   			f(j, 0, min(fra[i], frb[i]))
+   			  	ans += (i + 'a');
+   		}
+  		printf("%s\n", ans.c_str()); 
+  		ans ="";  
+ }
+
+  return 0;     
+}
+  
