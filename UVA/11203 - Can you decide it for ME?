@@ -1,0 +1,45 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <memory.h>
+#include <map>
+#include <queue>
+#include <stack>
+#include<set>
+#include <cmath>
+#define ll long long
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+#define f2(i, x, n) for(int i = x; i >= n; --i)
+using namespace std;
+
+int main() {
+  
+  
+  int n;
+  char s[54];
+
+  scanf("%d", &n);
+  while(n--){
+  	int a =0, b=0, c=0, k=0;
+  	bool ok = true;
+  	scanf("%s", s);
+  	while (s[k] == '?')a++, k++;
+    if(s[k] != 'M') ok = false;
+  	k++;
+  	while( s[k] == '?')b++, k++;
+  	if(s[k] != 'E')  ok = false;
+  	k++;
+  	while (s[k] == '?')c++, k++;
+  	if(s[k] != '\0')    ok = false;
+  	if ( a == (c - (b - 1)) - 1 && a && b && ok)
+  		puts("theorem");
+  	else
+  		puts("no-theorem");
+  }
+
+  return 0;     
+}
+  
