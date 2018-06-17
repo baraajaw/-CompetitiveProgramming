@@ -1,0 +1,66 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <memory.h>
+#include <map>
+#include <queue>
+#include <stack>
+#include<set>
+#include <cmath>
+#define ll long long
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+#define f2(i, x, n) for(int i = x; i >= n; --i)
+using namespace std;
+int const MAX = 1000001;
+bool prime[MAX];
+void sieve_of_eratosthenes() {
+  memset(prime, true, sizeof prime); // Assume every number is prime
+
+  prime[0] = prime[1] = false; // 0 and 1 are not primes
+
+  for(int i = 2; i * i < MAX; ++i)
+    if(prime[i])
+      for(int j = i * i; j < MAX; j += i)
+        prime[j] = false;
+}
+int main() {
+  sieve_of_eratosthenes();
+  int t, tt = 1;
+  char s[2001];
+  int frs[26], frc[26] , frn[10];
+  scanf("%d",&t);
+  while (t--){
+    memset(frc, 0, sizeof frc);
+    memset(frs, 0, sizeof frs);
+    memset(frn, 0, sizeof frn);
+    scanf("%s", s);
+    int len = strlen (s);
+    f(i, 0, len){
+       if (isdigit(s[i]))
+          frn[s[i]-'0']++;
+       else if (isupper(s[i]))
+          frc[s[i]-'A']++;
+       else
+          frs[s[i] -'a']++;    
+    }
+    string ans ="";
+    f(i, 0, 26){
+      if (prime[frc[i]]) ans += (char)(i +'A');
+      if (prime[frs[i]]) ans += (char)(i + 'a');
+    }
+    f(i, 0, 10)
+        if(prime[frn[i]]) ans += (char) ( i + '0');
+    sort(ans.begin(), ans.end());
+    if (ans.size() <= 0)
+      ans = "empty";
+    printf("Case %d: %s\n", tt++, ans.c_str());
+
+  }
+
+
+  return 0;     
+  
+}
