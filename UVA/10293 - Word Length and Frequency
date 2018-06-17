@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+#define f2(i, x, n) for(int i = x; i >= n; --i)
+using namespace std;
+int main() {
+  string s , c = "";
+  map < int , int > mp;
+  while (getline (cin, s)){
+    
+
+    if ( s != "#"){
+        if (s[s.size() - 1] == '-')
+          c += s;
+        else
+          c += s + " ";
+        continue;
+    }
+    
+    string tmp ="";
+    f(i, 0, c.size()){
+        if (c[i] == '\'' || c[i] == '-')
+          continue;
+        else if ( isalpha(c[i]))
+            tmp +=c[i];
+        else {
+          if (tmp != "\n")
+             mp[tmp.size()]++;
+          tmp = "";
+        }  
+    }
+    for ( auto it = mp.begin() ; it !=mp.end() ; it++)
+       if ( it-> first != 0)
+        cout << it->first <<" "<< it->second<< endl;
+    puts("");
+    //cout << c << endl;
+    mp.clear();
+    c ="";
+
+  }
+
+  return 0;     
+  
+}
