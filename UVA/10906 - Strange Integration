@@ -1,0 +1,82 @@
+/*
+he want to know the final  expression we can denote the last equation is the root the leaf will only be numbers
+now dfs from the root and begin to combine the right and the left side of the equation.
+  
+*/
+#include <bits/stdc++.h>
+#define ll long long
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+#define f2(i, x, n) for(int i = x; i >= n; --i)
+using namespace std;
+struct W
+{
+  string a, b, c;
+};
+map < string, W> mp;
+pair < string, string> dfs(string s){
+    string tmp = mp[s].a, ch="", ch2="" ;
+    pair < string, string > left, right;
+    left.first = mp[s].a, right.first = mp[s].c;
+    int cnt = 0, cnt2 = 0;
+    // left part 
+    f(i, 0, tmp.size())
+        if(isalpha(tmp[i]))
+            cnt++;
+    if ( cnt > 0 )
+        left = dfs(tmp);
+    cnt = 0;
+    f(i, 0, left.first.size())
+        if(left.first[i] >= '0' && left.first[i]<= '9') cnt++;
+    // right part
+    tmp = mp[s].c;
+    f(i, 0, tmp.size())
+      if(isalpha(tmp[i]))
+            cnt2++;
+    if ( cnt2 > 0 )
+      right = dfs(tmp); 
+    cnt2 = 0;          
+    f(i, 0, right.first.size())
+        if(right.first[i] >= '0' && right.first[i]<= '9') cnt2++;
+    
+    // if the left side is expr
+    if ( cnt != left.first.size() && cnt2 == right.first.size())
+           if (mp[s].b == "*" &&left.second == "+")
+              left.first = '(' + left.first + ')';        
+    // if the right side is expr
+    if (cnt == left.first.size() && cnt2 != right.first.size())
+          if (mp[s].b == right.second || ( right.second == "+" && mp[s].b == "*") )
+            right.first = '(' + right.first + ')';
+    // if both sides are expr
+    if ( cnt != left.first.size() && cnt2 != right.first.size()){
+         if (mp[s].b == "*" &&left.second == "+")
+              left.first = '(' + left.first + ')';   
+         if (mp[s].b == right.second || ( right.second == "+" && mp[s].b == "*") )
+            right.first = '(' + right.first + ')';     
+    }
+  return (make_pair(left.first+mp[s].b+ right.first, mp[s].b ));
+}
+
+int main() {
+  int t, n, tt = 1;
+  char a[50], b[50], c[50], d[50];
+
+
+  scanf("%d", &t);  
+  while(t--){
+       scanf("%d", &n);
+       mp.clear();
+       W tmp;
+       f(i, 0, n){
+          scanf("%s %s %s %s %s ", a, b, b, c, d);
+          tmp.a = b;
+          tmp.b = c;
+          tmp.c = d;
+          mp[a] = tmp;
+      } // end of n for 
+      pair < string , string> p = dfs(a);
+      printf("Expression #%d: %s\n", tt++, p.first.c_str());
+
+  }
+  return 0;     
+  
+}
