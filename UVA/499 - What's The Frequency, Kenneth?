@@ -1,0 +1,46 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <memory.h>
+#include <map>
+#include <queue>
+#include <stack>
+#include<set>
+#include <cmath>
+#define ll long long
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+#define f2(i, x, n) for(int i = x; i >= n; --i)
+using namespace std;
+int main() {
+  string s;
+  int fr[26], frc[26];
+  while ( getline (cin, s)){
+     memset(fr, 0, sizeof fr);
+     memset(frc, 0, sizeof frc);
+     f(i, 0, s.size())
+        if (isalpha(s[i]) && islower(s[i]))
+            fr[s[i]-'a']++;
+        else if (isalpha(s[i]) && isupper(s[i]))
+            frc[s[i]- 'A']++;  
+    string ans = "";
+    int mx = 0;  
+    f(i, 0, 26)
+        if(fr[i] > mx)
+          mx = fr[i], ans = (i + 'a');
+        else if ( fr[i] == mx)
+          ans += (i + 'a'); 
+    f(i, 0, 26)
+       if(frc[i] > mx)
+          mx = frc[i], ans = ( i + 'A');
+        else if(frc[i] == mx) 
+          ans +=(i + 'A'); 
+    sort(ans.begin(), ans.end());
+    printf("%s %d\n", ans.c_str() , mx );      
+  }
+
+  return 0;     
+  
+}
