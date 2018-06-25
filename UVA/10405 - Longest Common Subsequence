@@ -1,0 +1,49 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <memory.h>
+#include <map>
+#include <queue>
+#include <stack>
+#include<set>
+#include <cmath>
+#define ll long long 
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+using namespace std;
+char s[1001], c[1001] ;
+int lcs(int n , int m)
+{
+  int L[1001][1001];
+  for(int i = 1; i<= n; i++)
+    {
+      for(int j = 1; j<= m; j++)
+  {
+    if(i==0 || j==0)
+      {
+        L[i][j] = 0;
+      }
+    else if(s[i-1] == c[j-1])
+      {
+        L[i][j] = L[i-1][j-1] + 1;
+      }
+    else 
+      {
+        L[i][j] = max(L[i-1][j], L[i][j-1]);
+      }
+  }
+    }
+  return L[n][m];
+}
+int main() {
+ 
+ while(gets(s)){
+    gets(c);
+    int n = strlen (s), m = strlen (c);
+  cout << lcs(n, m)<< endl;
+ }
+
+  return 0;
+ }
