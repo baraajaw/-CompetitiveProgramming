@@ -1,0 +1,40 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <memory.h>
+#include <map>
+#include <queue>
+#include <stack>
+#include<set>
+#include <cmath>
+#define ll long long 
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+using namespace std;
+int  n, a[11];
+int dp[11][11];
+int cal ( int i, int lst ){
+    if ( i == n) return 0;
+    int &ret = dp[i][lst];
+    if ( ret != -1) return ret;
+    ret = 0;
+    ret = max ( ret , cal ( i + 1, lst));
+    if ( a[i] > a[lst]) 
+      ret= max ( ret , cal (i + 1, i) +1);
+    return ret;
+}
+int main() {
+ int res =0;
+ cin >> n;
+ f(i, 0, n) cin >> a[i];
+ memset(dp, -1, sizeof dp);
+ f(i, 0, n)
+    if(res < cal (i, i) + 1 )
+      res = cal(i, i) + 1;
+
+ cout << res << endl;  
+
+  return 0;
+ }
