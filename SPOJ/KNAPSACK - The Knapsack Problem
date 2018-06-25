@@ -1,0 +1,37 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <memory.h>
+#include <map>
+#include <queue>
+#include <stack>
+#include<set>
+#include <cmath>
+#define ll long long 
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+using namespace std;
+int s, n;
+pair <int, int > p[2001];
+int dp[2001][2001];
+int cal ( int i, int c ){
+    if ( i == n) return 0;
+    int &ret = dp[i][c];
+    if ( ret != -1) return ret;
+    ret = 0;
+    if ( c >= p[i].first) 
+      ret= max ( ret , cal (i + 1, c - p[i].first) + p[i].second);
+    ret = max ( ret , cal ( i + 1, c));
+    return ret;
+}
+int main() {
+ 
+ cin >> s >> n;
+ f(i, 0, n) cin >> p[i].first>> p[i].second;
+ memset(dp, -1, sizeof dp);
+ cout << cal (0, s)<< endl;
+
+  return 0;
+ }
