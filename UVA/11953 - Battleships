@@ -1,0 +1,52 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <memory.h>
+#include <map>
+#include <queue>
+#include <stack>
+#include<set>
+#include <cmath>
+#define ll long long 
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+using namespace std;
+int dx[] = { -1, 0, 1, 0 };
+int dy[] = { 0, 1, 0, -1};
+int n;
+vector < string > g;
+void DFS(int x, int y) {
+	g[x][y] = '.';
+	for (int i = 0; i < 4; i++) {
+		int nx = x + dx[i];
+		int ny = y + dy[i];
+
+		if (nx >= 0 && ny >= 0 && nx < n && ny < n  && (g[nx][ny] == 'x' || g[nx][ny] == '@') ) {
+			g[nx][ny] == '.';
+			DFS(nx, ny);
+		}
+	}
+}
+int main() {
+ int t, tt = 1;
+ cin >> t;
+ while (t--){
+ 	cin >> n;
+ 	g.clear();
+ 	g.resize(n);
+ 	f(i, 0, n) 
+ 		cin >> g[i];
+ 	int cnt = 0;
+ 	f(i, 0, n)
+ 		f(j, 0, n)
+ 			if ( g[i][j] == 'x'){
+ 					cnt++;
+ 					DFS(i, j);
+ 			}
+ 	printf("Case %d: %d\n", tt++, cnt);	
+ } 
+
+  return 0;
+ }
