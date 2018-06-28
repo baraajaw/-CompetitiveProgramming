@@ -1,0 +1,47 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <memory.h>
+#include <map>
+#include <queue>
+#include <stack>
+#include<set>
+#include <cmath>
+#define ll long long 
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+using namespace std;
+string a, b;
+int res = 0;
+
+bool can ( int mid){
+	string c = "";
+	f(i, 0, a.size())
+		f(j, 0, mid)
+			c += a[i];
+	int k = 0;		
+	f(i, 0, b.size())
+		if (b[i] == c[k])
+			k++;
+	return (k == c.size());					
+}
+int main() {
+ int t;
+ cin >> t;
+ while ( t--){
+ 	res = 0;
+ 	cin >> a >> b;
+ 	int l = 0, r = b.size()/a.size();
+ 	while ( l <= r){
+ 		int mid = ( l + r) / 2;
+ 		if ( can (mid))
+ 			res =max ( res, mid ), l= mid + 1;
+ 		else
+ 			r = mid - 1;
+ 	}
+ 	cout << res << endl;
+ } 
+  return 0;
+ }
