@@ -1,0 +1,57 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <memory.h>
+#include <map>
+#include <queue>
+#include <stack>
+#include<set>
+#include <cmath>
+#define ll long long 
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+using namespace std;
+int const N = 1e5 * 2 + 5;
+int n , ds[N], rankt[N];
+string a, b;
+map < string, int > mp;
+int find(int x) {
+    if(ds[x] == x)
+        return x;
+    return ds[x] = find(ds[x]);
+}
+int main() {
+
+ int t;
+ cin >> t; 
+ while (t--){
+ 	int cnt = 0;
+ 	mp.clear();
+
+ 	cin >> n;
+ 	f(i, 0, N) 
+ 		ds[i] = i, rankt[i] = 1;
+ 	f(i, 0, n){
+ 		cin >> a >> b;
+ 		if (mp.find(a) == mp.end())
+ 			mp[a] = cnt++;
+ 		if (mp.find(b) == mp.end()) 
+ 			mp[b] = cnt++;
+
+ 		int aa = find (mp[a]);
+ 		int bb = find (mp[b]);
+ 		if ( aa != bb ) { 
+ 			rankt[aa] += rankt[bb];
+ 			rankt[bb] = rankt[aa];
+ 			ds[aa] = bb;
+ 		}
+ 		cout << rankt[bb]<<endl;
+ 		
+ 	}
+ }
+ 
+
+  return 0;
+ }
