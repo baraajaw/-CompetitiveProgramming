@@ -1,0 +1,45 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <memory.h>
+#include <map>
+#include <queue>
+#include <stack>
+#include <set>
+#include <cmath>
+#include <time.h>
+#include <bitset>
+#define ll long long 
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+using namespace std;
+string s;
+int main() {
+  while (cin >> s){
+    bool ok = true;
+    int cnt = 0;
+    for (int i = s.size() - 1; i >= 0 ; --i){
+        if ( s[i] >= 'p' && s[i] <= 'z')
+            cnt++;
+        else if ( s[i] == 'N'){
+            if ( cnt == 0) ok = false;
+        }
+        else if ( s[i] == 'C' || s[i] == 'D' || s[i] == 'E' || s[i] == 'I'){
+            if ( cnt < 2){
+                ok = false;
+                continue;
+            }
+            cnt--;
+        }
+        else ok = false;
+    }
+    if (ok && cnt == 1)
+        puts("YES");
+    else
+        puts("NO");
+  }
+  
+  return 0;
+}
