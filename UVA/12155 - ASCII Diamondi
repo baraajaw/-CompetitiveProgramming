@@ -1,0 +1,39 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <memory.h>
+#include <map>
+#include <queue>
+#include <stack>
+#include <set>
+#include <cmath>
+#include <time.h>
+#include <bitset>
+#define ll long long 
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+using namespace std;
+int n;
+char cal (int i, int j){
+    int d = abs(i - (n-1)) + abs(j - (n-1));
+    return ( d >= n ? '.' : 'a' + d % ( 'z' - 'a' + 1));
+}
+int main() {
+  int  r1, r2, c1, c2;
+  int t = 1;
+  while (  scanf("%d%d%d%d%d" , &n, &r1, &c1, &r2, &c2) != EOF && n ){
+
+    if ( n == 0) break;
+    printf("Case %d:\n", t++ );
+    f(i, r1, r2 + 1){
+      f(j, c1, c2 + 1)
+        printf("%c", cal (i % (2 * n - 1), j % ( 2 * n - 1)));
+      puts("");  
+    }
+
+  }
+  
+  return 0;
+}
