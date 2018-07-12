@@ -1,0 +1,39 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <memory.h>
+#include <map>
+#include <queue>
+#include <stack>
+#include <set>
+#include <cmath>
+#include <bitset>
+#define ll long long 
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+using namespace std;
+int n, m, a[101], dp[50001][101];
+int cal ( int x, int y, int i){
+  if ( i == m) 
+      return abs ( y - x);
+  int & ret = dp[abs (y - x)][i];
+  if ( ret != -1) return ret;
+  int xx = x + a[i], yy = y + a[i];
+  int a = cal (xx , y, i + 1);
+  int b = cal (x, yy, i + 1);
+  ret = min (a, b);
+  return ret;  
+}
+int main() {
+  scanf("%d", &n);
+  while ( n--){
+    scanf("%d", &m);
+    f(i, 0, m)scanf("%d", &a[i]);
+    memset(dp, -1, sizeof dp);
+    printf("%d\n", cal (0, 0, 0));
+  } 
+  
+  return 0;
+}
