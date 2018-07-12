@@ -1,0 +1,46 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <memory.h>
+#include <map>
+#include <queue>
+#include <stack>
+#include <set>
+#include <cmath>
+#include <bitset>
+#define ll long long 
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+using namespace std;
+int n, k, x;
+bool  pos[40];
+int dp[40][40];
+int cal ( int i, int ope){
+  if ( ope < 0) return 0;
+  if ( i == n ) return ope == 0;
+  int & ret = dp[i][ope];
+  if ( ret != -1) return ret;
+  if (pos[i])
+     ret = cal (i+ 1, ope + 1);
+  else
+    ret = cal (i + 1, ope + 1) + cal ( i + 1, ope -1);
+  return ret;
+}
+int main() {
+  int t;
+  scanf("%d", &t);
+  while (t--){
+    scanf("%d%d" , &n, &k);
+    memset(pos, 0, sizeof pos);
+    f(i, 0, k){
+       scanf("%d",&x);
+       pos[x - 1] = 1;
+    }
+    n <<=1;
+    memset(dp, -1, sizeof dp);
+    printf("%d\n", cal (0, 0) );
+  }  
+  return 0;
+}
