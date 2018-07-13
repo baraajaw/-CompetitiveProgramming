@@ -1,0 +1,60 @@
+#include <iostream>
+#include <stdio.h>
+#include <string>
+#include <string.h>
+#include <vector>
+#include <algorithm>
+#include <memory.h>
+#include <map>
+#include <queue>
+#include <stack>
+#include <set>
+#include <cmath>
+#include <bitset>
+#define ll long long 
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+using namespace std;
+int t, n, cnt = 0, ans = 0;
+int dx[] = {-1, -1, 0, 1, 1, 1, 0, -1};
+int dy[] = {0, 1, 1, 1, 0, -1, -1, -1};
+vector < string> g;
+char s[27];
+string c = "";
+void dfs ( int i, int j){
+  g[i][j] = '0';
+  f(k, 0, 8){
+    int nx = dx[k] + i;
+    int ny = dy[k] + j;
+    if (nx < g.size() && nx >= 0 && ny < g[i].size() && n >= 0 && g[nx][ny] == '1'){
+      cnt++;
+      dfs(nx, ny);
+    }
+  }
+}
+int main() {
+  bool blank = false;
+  scanf("%d\n", &t);
+  while ( t--){
+    g.clear();
+    while (gets(s) ){
+        c = s;
+      if ( c.size() == 0) break;
+         g.push_back(c);
+    }
+    f(i, 0, g.size())
+        f(j, 0, g[i].size()){
+          if (g[i][j] == '1'){
+            cnt++;
+            dfs(i, j);
+            ans = max ( ans, cnt);
+            cnt = 0;
+          }
+        }
+     if(blank)printf("\n");
+        blank=true;   
+    printf("%d\n", ans);
+    ans = 0;         
+  }
+  
+  return 0;
+}
