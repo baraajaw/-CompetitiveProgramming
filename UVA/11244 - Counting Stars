@@ -1,54 +1,40 @@
-#include<iostream>
-#include<vector>
-#include<bitset>
-#include<stdio.h>
-#include<memory.h>
-#include<string>
+#include <bits/stdc++.h>
+#define ll long long 
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
 using namespace std;
-
-vector<string> g;
-int dx[] = { -1 ,-1 , 0 ,1 ,1 , 1 , 0 , -1};
-int dy[] = { 0 , 1 , 1 , 1 ,0 , -1 ,-1 ,-1};
-int n , m ; 
-
-void dfs ( int x , int y)
-{
-	bool flag = true;
-	for ( int i = 0 ; i < 8 ; i++)
-	{
-		int nx = x + dx[i];
-		int ny = y + dy[i];
-		if (nx >= 0 && ny >= 0 && nx < n && ny < m && g[nx][ny] == '*') 
-		{
-			flag = false;
-			break;
-		}
-
-	}
-	if ( flag )
-		g[x][y] = '.';
-}
-int main()
-{
-
-	
-  while ( scanf ( "%d%d" , &n , &m) && n && m)
-  {
-    g.clear();
-		g.resize(n);
-	  for ( int i = 0 ; i < n ; ++i)
-			  cin >> g[i];
-	  int cnt = 0;
-	  for ( int i = 0 ; i < n ; ++i)
-	  		 for ( int j = 0 ; j < m ; ++j)  
-	  			 if ( g[i][j] == '*')
-	  		  {
-	  				 dfs( i , j);
-	  				 if ( g[i][j] =='.')
-	  					 cnt++;
-	  		  }
-	  cout << cnt << endl;
+int n, m, ans = 0, cnt = 0;
+int dx[] = {-1, -1, 0, 1, 1, 1, 0, -1};
+int dy[] = {0, 1, 1, 1, 0, -1, -1, -1};
+vector < string > g;
+void dfs(int i, int j){
+  g[i][j] = '.';
+  f(k, 0, 8){
+    int nx = dx[k] + i;
+    int ny = dy[k] + j;
+    if ( nx < n && ny >= 0 && ny < m && nx >= 0 && g[nx][ny] == '*'){
+      cnt++;
+      dfs(nx, ny);
+    }
   }
-
-	return 0;
+} 
+int main() {
+  while ( scanf("%d%d", &n, &m) && n){
+      g.clear();
+      g.resize(n);
+      f(i, 0, n)
+        cin >> g[i];
+      f(i, 0, n)
+          f(j, 0, m)
+            if ( g[i][j] == '*'){
+              cnt++;
+              dfs(i, j);
+              if ( cnt == 1)
+                ans++;
+              cnt = 0;
+            }
+      printf("%d\n", ans);
+      ans = 0;    
+  }
+  
+  return 0;
 }
