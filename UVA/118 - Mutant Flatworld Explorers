@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+#define ll long long 
+#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+using namespace std;
+int n, m, x, y;
+bool vis[101][101];
+string s;
+char ch;
+int main() {
+  scanf("%d%d", &n, &m);
+  while ( scanf("%d%d %c", &x, &y, &ch) == 3 ){
+    cin >> s;
+    int cur = ch, ok = 0;
+    f(i, 0, s.size()){
+        if ( s[i] == 'F'){
+            switch(cur) {
+               case 'N':y++;break;
+               case 'E':x++;break;
+               case 'W':x--;break;
+               case 'S':y--;break;
+            }// switch
+        }// if
+        else if ( s[i] == 'R'){
+           switch(cur) {
+               case 'N':cur = 'E';break;
+               case 'E':cur = 'S';break;
+               case 'W':cur = 'N';break;
+               case 'S':cur = 'W';break;
+           }// switch
+        }// else if 
+        else{
+            switch(cur) {
+               case 'N':cur = 'W';break;
+               case 'E':cur = 'N';break;
+               case 'W':cur = 'S';break;
+               case 'S':cur = 'E';break;
+             }// switch
+        } // else
+        if (x < 0 || x > n || y < 0 || y > m){
+           switch(cur) {
+              case 'N':y--;break;
+              case 'E':x--;break;
+              case 'W':x++;break;
+              case 'S':y++;break;
+            }// switch 
+            if ( vis[x][y]) continue;
+            ok = 1;
+            vis[x][y] = 1;
+            break;
+        } 
+    }
+    if ( !ok)
+      printf("%d %d %c\n", x, y, cur);
+    else
+      printf("%d %d %c LOST\n", x, y, cur);
+
+  }
+  
+
+
+  return 0;
+}
