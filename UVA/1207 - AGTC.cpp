@@ -1,15 +1,4 @@
-#include <iostream>
-#include <stdio.h>
-#include <string>
-#include <string.h>
-#include <vector>
-#include <algorithm>
-#include <memory.h>
-#include <map>
-#include <queue>
-#include <stack>
-#include<set>
-#include <cmath>
+#include <bits/stdc++.h>
 #define ll long long 
 #define f(i, x, n) for(int i = x; i < (int)(n); ++i)
 using namespace std;
