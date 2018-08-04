@@ -63,6 +63,6 @@ while ( t--){
   puts("");
 
 }
- 
+  
   return 0;
 }
