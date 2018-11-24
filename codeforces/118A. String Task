@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+
+    int n;
+    char s[110];
+    char arr[] = {'a', 'e', 'i', 'o', 'u','y'};
+    scanf("%s", s);     n = strlen(s);
+
+    for(int i = 0; i < n; ++i){
+        if(binary_search(arr, arr + 6, tolower(s[i])))
+            continue;
+        else
+            printf(".%c", tolower(s[i]));
+    }
+    puts("");
+
+
+    return 0;
+
+}
