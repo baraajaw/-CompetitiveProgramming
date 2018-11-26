@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    
+    int ind_mx, ind_mn, mx = 0, mn = 101;
+    int n, a[101];
+
+    scanf("%d", &n);
+    for (int i = 0; i < n; ++i){
+        scanf("%d", a + i);
+        if (a[i] <= mn)
+            mn = a[i], ind_mn = i;
+        if (a[i] > mx)
+            mx = a[i], ind_mx = i;
+    }
+    int ans = (n - ind_mn - 1) + (ind_mx - (ind_mn < ind_mx));
+    printf("%d\n", ans);
+    
+   
+    return 0;
+}
