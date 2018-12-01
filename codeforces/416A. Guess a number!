@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+int dx[] = {-1, 0, 1, 0};
+int dy[] = {0, 1, 0, -1}; 
+
+int main() {
+    
+    int n, val, mx = -1e9 - 10 , mn = 1e9 + 10;
+    char yn;
+    string sym;
+
+    scanf("%d", &n);
+    for (int i = 0; i < n; ++i){
+        cin >> sym >> val >> yn;
+        if (sym == ">=" && yn == 'Y') mx = max(mx, val);
+        if (sym == ">" && yn == 'Y') mx = max(mx, val + 1);
+        if (sym == "<=" && yn == 'Y') mn = min(mn, val);
+        if (sym == "<" && yn == 'Y') mn = min(mn, val - 1);
+        if (sym == ">" && yn == 'N') mn = min(mn, val);
+        if (sym == ">=" && yn == 'N') mn = min(mn, val - 1);
+        if (sym == "<" && yn == 'N') mx = max(mx, val);
+        if (sym == "<=" && yn == 'N') mx = max(mx, val - 1);
+    }
+    if (mx > mn)
+        puts("Impossible");
+    else
+        printf("%d\n", mn);
+
+
+
+
+    return 0;
+}
