@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+int main(){
+
+    int n, t, cur;
+    int sum = 0, ans = 0;
+
+    while (cin >> n >> t){
+        for (int i = 0; i < n; ++i){
+            cin  >> cur;
+            sum += cur;
+            if (sum <= t)
+                ans++;
+        }
+        printf("%d\n", ans);
+        ans = sum = 0;
+    } 
+
+
+
+
+}
