@@ -1,31 +1,26 @@
-#include<iostream>
-#include<vector>
-#include<map>
-#include<string>
-#include<algorithm>
+#include<bits/stdc++.h>
 using namespace std;
-int main()
-{
-  
-  int n , x;
-  string s1 , s2;
-  cin >> x >> n;
-   map <string , string> arr;
-   for ( int i= 0 ; i < n ; i++)
-         {
-           cin >> s1 >> s2;
-           arr[s1] = s2;
-         }
-     for ( int i= 0 ; i < x ; i++)
-       {          cin >> s1;
-          if (  s1.size()  <=  arr[s1].size())
-             cout << s1 <<" ";
-             else
-             cout << arr[s1] <<" ";
-       }
 
-  cout<<endl;
-  
-  
-  return 0;
+int n, m;
+string s, c, ans = "";
+map<string, string> mp;
+
+int main(){
+
+    scanf("%d%d", &n, &m);
+    for (int i = 0; i < m; ++i){
+        cin >> s >> c;
+        mp[s] = c;
+    }
+    
+    for (int i = 0; i < n; ++i){
+        cin >> s;
+        ans += (s.size() <= mp[s].size() ? s : mp[s]);
+        if (i + 1 != n)
+            ans += " ";
+    }
+    printf("%s\n", ans.c_str());
+
+
+    
 }
