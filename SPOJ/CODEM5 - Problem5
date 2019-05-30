@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int n, s, a[10001];
+int dp[101][int(20 * 1e4 + 1)];
+
+int rec (int i, int sum){
+    if (sum == s)
+        return 0;
+    if (i == n || sum > s)
+        return 1e5 + 1;
+
+    int &ret = dp[i][sum];
+    if (ret != -1)
+        return dp[i][sum];
+    ret = 0;
+    return ret = min (rec(i + 1, sum + a[i]) + 1, rec(i + 1, sum));
+}
+
+int main(){
+
+    int T;
+    scanf("%d", &T);
+    while (T--){
+        scanf("%d%d", &n, &s);
+        memset(dp, -1, sizeof dp);
+
+        for (int i = 0; i < n; ++i)
+            scanf("%d", &a[i]);
+
+        int ans = rec(0, 0);
+        if (ans >= 1e5)
+            puts("impossible");
+        else
+            printf("%d\n", ans);
+    }
+
+
+}
