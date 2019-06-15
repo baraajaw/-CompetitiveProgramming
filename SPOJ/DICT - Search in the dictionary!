@@ -1,123 +1,77 @@
-#include <iostream>
-#include <stdio.h>
-#include <string>
-#include <string.h>
-#include <vector>
-#include <algorithm>
-#include <memory.h>
-#include <map>
-#include <queue>
-#include <stack>
-#include <set>
-#include <cmath>
-#include <time.h>
-#include <bitset>
-#define ll long long 
-#define f(i, x, n) for(int i = x; i < (int)(n); ++i)
+#include<bits/stdc++.h>
 using namespace std;
-struct trie {
-  trie *next[26];
-  bool end;
-  int pre;
-  
-  trie() {
-    for(int i = 0; i < 26; ++i)
-      next[i] = NULL;
-      end= pre = 0;
-  }
+
+struct trie{
+	trie *nxt[26];
+	int pre;
+	bool end;
+
+	trie(){
+		for (int i = 0; i < 26; ++i)
+			nxt[i] = NULL;
+		pre = end = 0;
+	}
 };
-//***************
+
+int n, m;
+string s,c;
 trie *root;
-string s, c;
-vector < string > v;
-//*****************
+vector<string> v;
 
 void insert(){
-    trie * cur = root;
-    f(i, 0, s.size()){
-        int num = s[i] - 'a';
-        if (cur -> next[num] == NULL)
-            cur -> next[num] = new trie();
-        cur = cur -> next[num];
-        ++cur -> pre;
-    }
-    cur -> end = true;
+	trie *cur = root;
+	for (int i = 0; i < s.size(); ++i){
+		int num = s[i] - 'a';
+		if (cur -> nxt[num] == NULL)
+			cur -> nxt[num] = new trie();
+		cur = cur -> nxt[num];
+		cur->pre++;
+	}
+	cur->end = true;
 }
-//******************
-void make_word (string tmp, trie * cur );
-bool find() {
-  trie *cur = root;
-  string tmp;
-  f(i, 0, s.size()){
-    int num = s[i] - 'a';
-    if (cur -> next[num] == NULL)
-        return false;
-    cur = cur -> next[num];
-  }
-  c = s;
-  tmp = s;
-  f(i, 0, 26){
-    c = s;
-    tmp = s;
-    if ( cur->next[i] != NULL){
-        c += ( i + 'a');
-        tmp += ( i + 'a');
-        trie * tmpcur = cur -> next[i];
-        make_word(tmp, tmpcur); 
-    }
-  }
-  return true;
-}
-// ***************
+
 void make_word (string tmp, trie * cur ){
-    if ( cur -> end)
-        v.push_back(tmp);
-    f(i, 0, 26){
-        if ( cur -> next[i] != NULL){
-            tmp +=( i + 'a');
-            trie * tmpcur = cur -> next[i];
-            make_word (tmp, tmpcur);
-            tmp = tmp.substr ( 0 , tmp.size() - 1);
-
-        }   
-    }
+	if (cur->end && tmp != s)
+		v.push_back(tmp);
+	for ( int i = 0; i < 26; ++i)
+		if (cur -> nxt[i] != NULL)
+			make_word(tmp + char(i + 'a'), cur -> nxt[i]);		
 }
 
-void freeTrie(trie *cur) {
-  if(cur == NULL)
-    return;
-  for(int i = 0; i < 26; ++i)
-    freeTrie(cur->next[i]);
-  delete [] cur;
+bool find(){
+	trie *cur = root;
+	for (int i = 0; i < s.size(); ++i){
+		int num = s[i] - 'a';
+		if (cur -> nxt[num] == NULL)
+			return false;
+		cur = cur -> nxt[num];
+	}
+	
+	make_word(s, cur);
+	return true;
 }
 
-int main() {
+int main(){
 
-  root = new trie();
-  
-  int n;
-  scanf("%d", &n);
-  for(int i = 0; i < n; ++i) {
-    cin >> s;
 
-    insert();
-  }
-  int m;
-  cin >> m;
-  for(int i = 0; i < m; ++i) {
-    cin >> s;
-    v.clear();
+	root = new trie();
 
-    printf("Case #%d:\n", i + 1 );
+	cin >> n;
+	for (int i = 0; i < n; ++i){
+		cin >> s;
+		insert();
+	}
 
-    if(find())
-      f (j, 0, v.size() )
-        printf("%s\n" , v[j].c_str());
-    else
-        puts("No match.");      
-  }
-  
-  freeTrie(root);
-  
-  return 0;
+	cin >> m;
+	for (int i = 0; i < m; ++i){
+		cout <<"Case #"<< i + 1<<":"<<endl;
+		cin >> s;
+		if (find()){
+			for (int i = 0; i < v.size(); ++i)
+				cout << v[i]<<endl;
+			v.clear();
+		}
+		else
+			cout <<"No match."<<endl;
+	}
 }
